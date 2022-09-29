@@ -3,7 +3,7 @@ import logo from './../../../assets/logo.svg';
 
 const FullSidebar = ({ showCollabsed }) => {
 	return (
-		<><aside className="h-screen flex flex-col items-center w-48 h-full overflow-hidden text-gray-700 bg-gray-100 rounded">
+		<><aside className="h-screen flex flex-col items-center w-48 overflow-hidden text-gray-700 bg-gray-100 rounded">
 			<a className="flex items-center w-full px-3 mt-3" href="/">
 				<img className="stroke-current w-9" src={logo} alt="side arrow" />
 				<span className="ml-2 text-sm font-bold">Todo App</span>

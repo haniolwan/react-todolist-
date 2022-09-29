@@ -5,7 +5,7 @@ import logo from './../../../assets/logo.svg';
 import './style.css';
 const CollabsedSidebar = ({ showCollabsed }) => {
     return (
-        <aside className="h-screen flex flex-col items-center w-16 h-full overflow-hidden text-gray-700 bg-gray-100 rounded">
+        <aside className="h-screen flex flex-col items-center w-16 overflow-hidden text-gray-700 bg-gray-100 rounded">
             <a className="flex items-center justify-center mt-3" href="/">
                 <img className="stroke-current w-9" src={logo} alt="side arrow" />
             </a>
