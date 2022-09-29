@@ -1,0 +1,21 @@
+.header-container {
+    grid-column: 2/2;
+    display: grid;
+    grid-template-columns: 25% 50% 35%;
+    grid-template-rows: 20%;
+}
+.new-task-btn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.welcome-text h1{
+    font-family: Nunito Sans;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+}

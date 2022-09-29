@@ -3,7 +3,7 @@ import logo from './../../../assets/logo.svg';
 
 const FullSidebar = ({ showCollabsed }) => {
 	return (
-		<aside className="h-screen flex flex-col items-center w-48 h-full overflow-hidden text-gray-700 bg-gray-100 rounded">
+		<><aside className="h-screen flex flex-col items-center w-48 h-full overflow-hidden text-gray-700 bg-gray-100 rounded">
 			<a className="flex items-center w-full px-3 mt-3" href="/">
 				<img className="stroke-current w-9" src={logo} alt="side arrow" />
 				<span className="ml-2 text-sm font-bold">Todo App</span>
@@ -67,10 +67,11 @@ const FullSidebar = ({ showCollabsed }) => {
 					<span className="ml-2 text-sm font-medium text-[#DA1E28]">Logout</span>
 				</a>
 			</div>
-			<a className="flex items-center justify-center w-full h-16 mt-auto bg-gray-200 hover:bg-gray-300" href="/" onClick={(event) => { event.preventDefault(); showCollabsed('collabse') }} >
+			<a className="flex items-center justify-center w-full h-16 mt-auto bg-gray-200 hover:bg-gray-300" href="/" onClick={(event) => { event.preventDefault(); showCollabsed('collabse'); }}>
 				<svg className="stroke-current w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m8.5 12.8 5.7 5.6c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-4.9-5 4.9-5c.4-.4.4-1 0-1.4-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3l-5.7 5.6c-.4.5-.4 1.1 0 1.6 0-.1 0-.1 0 0z" /></svg>
 			</a>
 		</aside>
+		</>
 	)
 }
 
