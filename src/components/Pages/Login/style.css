@@ -1,0 +1,74 @@
+.login-header-image {
+    background-image: url('./../../../assets/login-background.png');
+    background-repeat: no-repeat;
+    width: 40%;
+}
+
+.login-content {
+    width: 60%;
+}
+
+.login-title {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 68px;
+    text-transform: uppercase;
+    color: #40A1FC;
+    mix-blend-mode: normal;
+}
+
+.login-description {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    text-transform: capitalize;
+    color: #000000;
+    mix-blend-mode: normal;
+    margin-bottom: 30px;
+}
+
+.or {
+    width: 30px;
+    height: 27px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    color: #E7E7E7;
+    margin: 10px;
+}
+
+.login {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.login hr {
+    border: 1px solid #E7E7E7;
+    width: 250px;
+}
+
+.login input {
+    width: 560px;
+}
+
+.login-image-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 68px;
+    text-transform: uppercase;
+}
+
+.login-image-description {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 41px;
+    text-transform: uppercase;
+}
