@@ -9,3 +9,14 @@
   .violit-radio {
     accent-color: blueviolet;
   }
+
+
+  .modal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s linear;
+    /* filter: blur(2px);
+  -webkit-filter: blur(2px); */
+  }
