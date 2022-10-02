@@ -1,3 +1,11 @@
 .side-arrow {
     transform: rotate(180deg);
 }
+
+/* 320px — 480px: Mobile devices */
+
+@media (max-width: 768px) {
+    .sidebar-arrow {
+        display: none !important;
+    }
+}

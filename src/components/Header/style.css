@@ -1,21 +1,29 @@
 .header-container {
     grid-column: 2/2;
     display: grid;
-    grid-template-columns: 25% 50% 35%;
-    grid-template-rows: 20%;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding-bottom: 20px;
 }
-.new-task-btn{
+
+.new-task-btn {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-left: 20px;
+    width: 150px;
+    height: 42px;
 }
 
-.welcome-text h1{
-    font-family: Nunito Sans;
-    font-size: 24px;
+.welcome-text h1 {
+    font-size: 22px;
     font-weight: 800;
-    line-height: 33px;
+    line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
+}
+
+.header-container hr {
+    height: 5px;
+    background-color: black;
+    width: 100%;
 }

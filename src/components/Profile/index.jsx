@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-// import img from './../../assets/profile image.jpeg';
+import { useState } from 'react'
 import user from './../../assets/dropdown/account.svg';
 import edit from './../../assets/dropdown/edit-user.svg';
 import settings from './../../assets/dropdown/settings.svg';
@@ -14,7 +13,7 @@ const Profile = () => {
     return (
         <div className="action">
             <div className="profile" onClick={() => showMenu()}>
-                <img src={'img'} alt="profile IMG" />
+                <img src='https://i.pinimg.com/736x/b0/e2/f5/b0e2f54d141a70986beac46962394651.jpg' alt="profile IMG" />
             </div>
             <div className={`menu ${show && 'active'}`}
             >

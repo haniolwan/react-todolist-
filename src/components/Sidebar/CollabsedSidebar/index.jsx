@@ -1,11 +1,10 @@
-import React from 'react'
 import sideArrow from './../../../assets/left-arrow.svg';
 import logo from './../../../assets/logo.svg';
 
 import './style.css';
 const CollabsedSidebar = ({ showCollabsed }) => {
     return (
-        <aside className="h-screen flex flex-col items-center w-16 overflow-hidden text-gray-700 bg-gray-100 rounded">
+        <aside className="h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-gray-100 rounded bg-white mr-5">
             <a className="flex items-center justify-center mt-3" href="/">
                 <img className="stroke-current w-9" src={logo} alt="side arrow" />
             </a>
@@ -59,7 +58,7 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                     </svg>
                 </a>
             </div>
-            <a className="flex items-center justify-center w-16 h-16 mt-auto bg-gray-200 hover:bg-gray-300" href="/"
+            <a className="sidebar-arrow flex items-center justify-center w-16 h-16 mt-auto bg-gray-200 hover:bg-gray-300" href="/"
                 onClick={(event) => { event.preventDefault(); showCollabsed('full') }} >
                 <img className="stroke-current w-7 side-arrow" src={sideArrow} alt="side arrow" />
             </a>
