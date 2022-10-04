@@ -1,5 +1,6 @@
 import Profile from '../Profile';
-import plus from './../../assets/plus.svg';
+import plus from './../../../assets/plus.svg';
+
 import './style.css';
 
 const Header = ({ hideModal }) => {

@@ -1,5 +1,5 @@
-import sideArrow from './../../../assets/left-arrow.svg';
-import logo from './../../../assets/logo.svg';
+import sideArrow from './../../../../assets/left-arrow.svg';
+import logo from './../../../../assets/logo.svg';
 
 import './style.css';
 const CollabsedSidebar = ({ showCollabsed }) => {

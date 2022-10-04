@@ -1,5 +1,5 @@
-import close from './../../../assets/close.svg';
-import bell from './../../../assets/bell.svg';
+import close from './../../../../assets/close.svg';
+import bell from './../../../../assets/bell.svg';
 import './style.css';
 const TaskModal = ({ show, hideModal }) => {
 

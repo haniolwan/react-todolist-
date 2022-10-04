@@ -1,10 +1,7 @@
-import check from './../../assets/check.svg';
-import alert from './../../assets/alert.svg';
-import clock from './../../assets/clock.svg';
-import kabab from './../../assets/kabab.svg';
-
-
-
+import check from './../../../assets/check.svg';
+import alert from './../../../assets/alert.svg';
+import clock from './../../../assets/clock.svg';
+import kabab from './../../../assets/kabab.svg';
 import './style.css';
 
 const Tasks = () => {

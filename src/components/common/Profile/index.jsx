@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import user from './../../assets/dropdown/account.svg';
-import edit from './../../assets/dropdown/edit-user.svg';
-import settings from './../../assets/dropdown/settings.svg';
-import logout from './../../assets/dropdown/sign-out.svg';
+import { useState } from 'react';
+import user from './../../../assets/dropdown/account.svg';
+import edit from './../../../assets/dropdown/edit-user.svg';
+import settings from './../../../assets/dropdown/settings.svg';
+import logout from './../../../assets/dropdown/sign-out.svg';
 import './style.css';
 
 const Profile = () => {

@@ -1,18 +1,20 @@
-import Calender from "./Calender";
+
 import DailyStatistics from "./Daily Statistics";
 import Header from "./Header";
-import Profile from "./Profile";
 import CollabsedSidebar from "./Sidebar/CollabsedSidebar";
 import FullSidebar from "./Sidebar/FullSidebar";
+import TaskModal from "./Modals/Task";
+import Calender from "./Calender";
 import Tasks from "./Tasks";
-
+import Success from "./Notifications/Success";
 
 export {
     Header,
     FullSidebar,
     CollabsedSidebar,
-    Profile,
-    Calender,
     Tasks,
-    DailyStatistics
+    Calender,
+    DailyStatistics,
+    TaskModal,
+    Success
 }
