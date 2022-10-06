@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logoutUser from '../../../../utils/logout';
 import logo from './../../../../assets/logo.svg';
 
 const FullSidebar = ({ showCollabsed }) => {
-
+	const { pathname } = useLocation()
 	return (
 		<><aside className="h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-white rounded mr-5">
 			<Link to={'/'} className="flex items-center w-full px-3 mt-3">
@@ -12,14 +12,14 @@ const FullSidebar = ({ showCollabsed }) => {
 			</Link>
 			<div className="w-full px-2">
 				<div className="flex flex-col items-center w-full mt-3 border-gray-300">
-					<Link to={'/'} className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300`}>
+					<Link to={'/'} className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${pathname === '/' && 'bg-gray-300'}`}>
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M2 9L11 2L20 9V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V9Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 							<path d="M8 22V12H14V22" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						<span className="ml-2 text-sm font-medium">Home</span>
 					</Link>
-					<Link to={'/calender'} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
+					<Link to={'/calender'} className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${pathname === '/calender' && 'bg-gray-300'}`}>
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g>
 								<path d="M18 4H4C2.89543 4 2 4.89543 2 6V20C2 21.1046 2.89543 22 4 22H18C19.1046 22 20 21.1046 20 20V6C20 4.89543 19.1046 4 18 4Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -30,7 +30,7 @@ const FullSidebar = ({ showCollabsed }) => {
 						</svg>
 						<span className="ml-2 text-sm font-medium">Calender</span>
 					</Link>
-					<Link to={'/statistics'} className="flex items-center w-full h-12 px-3 mt-2 hover:bg-gray-300 rounded">
+					<Link to={'/statistics'} className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${pathname === '/statistics' && 'bg-gray-300'}`}>
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g opacity="">
 								<path d="M20 26V11" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -41,7 +41,7 @@ const FullSidebar = ({ showCollabsed }) => {
 						<span className="ml-2 text-sm font-medium">Statistics</span>
 					</Link>
 				</div>
-				<Link to={'/notifications'} className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
+				<Link to={'/notifications'} className={`relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${pathname === '/notifications' && 'bg-gray-300'}`}>
 					<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g opacity="">
 							<path d="M17 8C17 6.4087 16.3679 4.88258 15.2426 3.75736C14.1174 2.63214 12.5913 2 11 2C9.4087 2 7.88258 2.63214 6.75736 3.75736C5.63214 4.88258 5 6.4087 5 8C5 15 2 17 2 17H20C20 17 17 15 17 8Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />

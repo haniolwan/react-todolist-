@@ -20,6 +20,10 @@ const App = () => {
     <>
       <NotificationsContext.Provider value={{ title, setTitle, message, setMessage }}>
         <Routes>
+          <Route path="/calender" element={<div>Calender Page</div>} />
+          <Route path="/statistics" element={<div>Statistics Page</div>} />
+          <Route path="/notifications" element={<div>Notifications Page</div>} />
+          <Route path="/settings" element={<div>Settings Page</div>} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={

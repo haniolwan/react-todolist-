@@ -1,21 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import sideArrow from './../../../../assets/left-arrow.svg';
 import logo from './../../../../assets/logo.svg';
 import './style.css';
 import logoutUser from '../../../../utils/logout';
 const CollabsedSidebar = ({ showCollabsed }) => {
+    const { pathname } = useLocation();
     return (
         <aside className="h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-gray-100 rounded bg-white mr-5">
             <Link to={'/'} className="flex items-center justify-center mt-3">
                 <img className="stroke-current w-9" src={logo} alt="side arrow" />
             </Link>
-            <Link to={'/'} className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300">
+            <Link to={'/'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/' && 'bg-gray-300'}`}>
                 <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 9L11 2L20 9V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V9Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M8 22V12H14V22" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </Link>
-            <Link to={'/calender'} className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300">
+            <Link to={'/calender'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/calender' && 'bg-gray-300'}`}>
                 <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <path d="M18 4H4C2.89543 4 2 4.89543 2 6V20C2 21.1046 2.89543 22 4 22H18C19.1046 22 20 21.1046 20 20V6C20 4.89543 19.1046 4 18 4Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -25,7 +26,7 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                     </g>
                 </svg>
             </Link>
-            <Link to={'/statistics'} className="flex items-center justify-center w-12 h-12 mt-2 bg-gray-300 rounded" href="/">
+            <Link to={'/statistics'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/statistics' && 'bg-gray-300'}`}>
                 <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="">
                         <path d="M20 26V11" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -34,7 +35,7 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                     </g>
                 </svg>
             </Link>
-            <Link to={'/notifications'} className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300" href="/">
+            <Link to={'/notifications'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/notifications' && 'bg-gray-300'}`}>
                 <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="">
                         <path d="M17 8C17 6.4087 16.3679 4.88258 15.2426 3.75736C14.1174 2.63214 12.5913 2 11 2C9.4087 2 7.88258 2.63214 6.75736 3.75736C5.63214 4.88258 5 6.4087 5 8C5 15 2 17 2 17H20C20 17 17 15 17 8Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -43,7 +44,7 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                 </svg>
             </Link>
             <div className="flex flex-col items-center mt-2 border-t border-gray-300">
-                <Link to={'/settings'} className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300" href="/">
+                <Link to={'/settings'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/settings' && 'bg-gray-300'}`}>
                     <svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="">
                             <path d="M11.5 14.0909C12.9309 14.0909 14.0909 12.9309 14.0909 11.5C14.0909 10.069 12.9309 8.90906 11.5 8.90906C10.0691 8.90906 8.90912 10.069 8.90912 11.5C8.90912 12.9309 10.0691 14.0909 11.5 14.0909Z" stroke="" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
