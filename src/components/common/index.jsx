@@ -6,7 +6,7 @@ import FullSidebar from "./Sidebar/FullSidebar";
 import TaskModal from "./Modals/Task";
 import Calender from "./Calender";
 import Tasks from "./Tasks";
-import Success from "./Notifications/Success";
+import Success from "./Alerts/Success";
 
 export {
     Header,

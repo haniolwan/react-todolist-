@@ -4,9 +4,13 @@ import edit from './../../../assets/dropdown/edit-user.svg';
 import settings from './../../../assets/dropdown/settings.svg';
 import logout from './../../../assets/dropdown/sign-out.svg';
 import './style.css';
+import { useSelector } from 'react-redux';
+import logoutUser from '../../../utils/logout';
+
 
 const Profile = () => {
     const [show, setShow] = useState(false);
+    const { userData: { name } } = useSelector((state) => state.user);
     const showMenu = () => {
         setShow((show) => !show);
     }
@@ -17,7 +21,7 @@ const Profile = () => {
             </div>
             <div className={`menu ${show && 'active'}`}
             >
-                <h3>John Doe<br /><span>Software Developer</span></h3>
+                <h3 className="capitalize">{name}<br /><span>Software Developer</span></h3>
                 <ul>
                     <li>
                         <img src={user} alt="user" />
@@ -33,7 +37,7 @@ const Profile = () => {
                     </li>
                     <li>
                         <img src={logout} alt="user" />
-                        <a href="/">Logout</a>
+                        <a href="/" onClick={logoutUser}>Logout</a>
                     </li>
                 </ul>
             </div>

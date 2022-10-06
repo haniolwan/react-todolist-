@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import NotificationsContext from "../../../context/Notifications";
 
-const Success = ({ title, message }) => {
+const Success = () => {
     const [show, setShow] = useState(true);
+    const { title, message } = useContext(NotificationsContext);
     if (title) {
         setTimeout(() => {
             setShow(false);
@@ -34,5 +36,4 @@ const Success = ({ title, message }) => {
         </div>
     )
 }
-
 export default Success;

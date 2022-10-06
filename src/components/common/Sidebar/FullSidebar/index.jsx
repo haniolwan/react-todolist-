@@ -1,22 +1,25 @@
+import { Link } from 'react-router-dom';
+import logoutUser from '../../../../utils/logout';
 import logo from './../../../../assets/logo.svg';
 
 const FullSidebar = ({ showCollabsed }) => {
+
 	return (
 		<><aside className="h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-white rounded mr-5">
-			<a className="flex items-center w-full px-3 mt-3" href="/">
+			<Link to={'/'} className="flex items-center w-full px-3 mt-3">
 				<img className="stroke-current w-9" src={logo} alt="side arrow" />
 				<span className="ml-2 text-sm font-bold">Todo App</span>
-			</a>
+			</Link>
 			<div className="w-full px-2">
 				<div className="flex flex-col items-center w-full mt-3 border-gray-300">
-					<a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/">
+					<Link to={'/'} className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300`}>
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M2 9L11 2L20 9V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V9Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 							<path d="M8 22V12H14V22" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						<span className="ml-2 text-sm font-medium">Home</span>
-					</a>
-					<a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/">
+					</Link>
+					<Link to={'/calender'} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g>
 								<path d="M18 4H4C2.89543 4 2 4.89543 2 6V20C2 21.1046 2.89543 22 4 22H18C19.1046 22 20 21.1046 20 20V6C20 4.89543 19.1046 4 18 4Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -26,8 +29,8 @@ const FullSidebar = ({ showCollabsed }) => {
 							</g>
 						</svg>
 						<span className="ml-2 text-sm font-medium">Calender</span>
-					</a>
-					<a className="flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded" href="/">
+					</Link>
+					<Link to={'/statistics'} className="flex items-center w-full h-12 px-3 mt-2 hover:bg-gray-300 rounded">
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g opacity="">
 								<path d="M20 26V11" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -36,9 +39,9 @@ const FullSidebar = ({ showCollabsed }) => {
 							</g>
 						</svg>
 						<span className="ml-2 text-sm font-medium">Statistics</span>
-					</a>
+					</Link>
 				</div>
-				<a className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/">
+				<Link to={'/notifications'} className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
 					<svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g opacity="">
 							<path d="M17 8C17 6.4087 16.3679 4.88258 15.2426 3.75736C14.1174 2.63214 12.5913 2 11 2C9.4087 2 7.88258 2.63214 6.75736 3.75736C5.63214 4.88258 5 6.4087 5 8C5 15 2 17 2 17H20C20 17 17 15 17 8Z" stroke="" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -47,8 +50,8 @@ const FullSidebar = ({ showCollabsed }) => {
 					</svg>
 					<span className="ml-2 text-sm font-medium">Notifications</span>
 					<span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
-				</a>
-				<a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/">
+				</Link>
+				<Link to={'/settings'} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
 					<svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g opacity="">
 							<path d="M11.5 14.0909C12.9309 14.0909 14.0909 12.9309 14.0909 11.5C14.0909 10.069 12.9309 8.90906 11.5 8.90906C10.0691 8.90906 8.90912 10.069 8.90912 11.5C8.90912 12.9309 10.0691 14.0909 11.5 14.0909Z" stroke="" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -56,8 +59,8 @@ const FullSidebar = ({ showCollabsed }) => {
 						</g>
 					</svg>
 					<span className="ml-2 text-sm font-medium">Settings</span>
-				</a>
-				<a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/">
+				</Link>
+				<a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="/" onClick={logoutUser}>
 					<svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M8.33333 21H4.11111C3.55121 21 3.01424 20.7776 2.61833 20.3817C2.22242 19.9858 2 19.4488 2 18.8889V4.11111C2 3.55121 2.22242 3.01424 2.61833 2.61833C3.01424 2.22242 3.55121 2 4.11111 2H8.33333" stroke="#DA1E28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 						<path d="M15.7222 16.7777L21 11.4999L15.7222 6.22217" stroke="#DA1E28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -66,9 +69,10 @@ const FullSidebar = ({ showCollabsed }) => {
 					<span className="ml-2 text-sm font-medium text-[#DA1E28]">Logout</span>
 				</a>
 			</div>
-			<a className="flex items-center justify-center w-full h-16 mt-auto bg-gray-200 hover:bg-gray-300" href="/" onClick={(event) => { event.preventDefault(); showCollabsed('collabse'); }}>
+			<div className="flex items-center justify-center w-full h-16 mt-auto bg-gray-200 hover:bg-gray-300 cursor-pointer"
+				onClick={() => showCollabsed('collabse')}>
 				<svg className="stroke-current w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m8.5 12.8 5.7 5.6c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-4.9-5 4.9-5c.4-.4.4-1 0-1.4-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3l-5.7 5.6c-.4.5-.4 1.1 0 1.6 0-.1 0-.1 0 0z" /></svg>
-			</a>
+			</div>
 		</aside>
 		</>
 	)

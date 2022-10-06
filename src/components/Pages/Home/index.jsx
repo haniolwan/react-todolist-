@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import NotificationsContext from '../../../Context/Notifications';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
     Calender,
     CollabsedSidebar,
@@ -11,33 +11,33 @@ import {
     Success
 } from '../../common';
 
-
 const Home = () => {
     const [sidebarShow, setSidebarShow] = useState("full");
     const [showModal, setShowModal] = useState(false);
-
+    const user = useSelector((state) => state.user);
     const showCollabsedSidebar = (sidebar) => {
         setSidebarShow(sidebar)
     }
     const hideModal = () => {
         setShowModal((show) => !show)
     }
-    const { title, message } = useContext(NotificationsContext);
     return (
-        <>
-            {sidebarShow === 'full' ? <FullSidebar showCollabsed={showCollabsedSidebar} /> : <CollabsedSidebar showCollabsed={showCollabsedSidebar} />}
-            <Header hideModal={hideModal} />
-            <h1 className="tasks-title">Tasks</h1>
-            <div className="flex gap-5 mr-14">
-                <Tasks />
-                <div className='flex flex-col'>
-                    <Success title={title} message={message} />
-                    <Calender />
-                    <DailyStatistics />
+        user.isAuthorized ?
+            <>
+                {sidebarShow === 'full' ? <FullSidebar showCollabsed={showCollabsedSidebar} /> : <CollabsedSidebar showCollabsed={showCollabsedSidebar} />}
+                <Header hideModal={hideModal} />
+                <h1 className="tasks-title">Tasks</h1>
+                <div className="flex gap-5 mr-14">
+                    <Tasks />
+                    <div className='flex flex-col'>
+                        <Success />
+                        <Calender />
+                        <DailyStatistics />
+                    </div>
                 </div>
-            </div>
-            <TaskModal show={showModal} hideModal={hideModal} />
-        </>
+                <TaskModal show={showModal} hideModal={hideModal} />
+            </>
+            : null
     )
 }
 
