@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import sideArrow from './../../../../assets/left-arrow.svg';
 import logo from './../../../../assets/logo.svg';
 import './style.css';
-import logoutUser from '../../../../utils/logout';
 const CollabsedSidebar = ({ showCollabsed }) => {
     const { pathname } = useLocation();
     return (
@@ -52,13 +51,6 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                         </g>
                     </svg>
                 </Link>
-                <a className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300" href="/" onClick={logoutUser}>
-                    <svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.33333 21H4.11111C3.55121 21 3.01424 20.7776 2.61833 20.3817C2.22242 19.9858 2 19.4488 2 18.8889V4.11111C2 3.55121 2.22242 3.01424 2.61833 2.61833C3.01424 2.22242 3.55121 2 4.11111 2H8.33333" stroke="#DA1E28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M15.7222 16.7777L21 11.4999L15.7222 6.22217" stroke="#DA1E28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M21 11.5H8.33331" stroke="#DA1E28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </a>
             </div>
             <div className="sidebar-arrow flex items-center justify-center w-16 h-16 mt-auto bg-gray-200 hover:bg-gray-300 cursor-pointer"
                 onClick={() => showCollabsed('full')} >
