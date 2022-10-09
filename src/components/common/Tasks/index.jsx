@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import Dropdown from './../Modals/Dropdown';
+import Dropdown from '../Modals/Dropdown';
 import TodosSkelton from '../Skelton/TodosSkelton';
 import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
 import './style.css';
+
+import CompleteTasks from '../Modals/Complete Tasks';
 
 const Tasks = () => {
     const [loading, setLoading] = useState(true);
@@ -16,6 +18,7 @@ const Tasks = () => {
     const [lastList, setLastList] = useState(false);
     const [clickedId, setClickedId] = useState(0);
     const [filter, setFilter] = useState('');
+    const [showCompleteModal, setShowCompleteModal] = useState(false);
     const listInnerRef = useRef();
 
     const priorityColor = (priority) => {
@@ -77,6 +80,11 @@ const Tasks = () => {
         return setClickedId(null)
     }
 
+    const showCompleteModalFunc = () => {
+        return setShowCompleteModal(null)
+    }
+
+
     return (
         <>
             <section className="tasks-section bg-[#fff] w-4/5">
@@ -84,6 +92,7 @@ const Tasks = () => {
                     <div className="tasks-header">
                         <h1>Tasks For This Day</h1>
                         <button
+                            onClick={() => setShowCompleteModal(true)}
                             type="button"
                             className="new-task-btn mr-4 text-[#40A1FC] bg-[#ECF6FF] hover:bg-[#b4d8f7] font-medium rounded-lg text-sm px-3 py-2.5">
                             <img src={check} alt="check tasks" />
@@ -156,6 +165,7 @@ const Tasks = () => {
                         </div>
                         : <TodosSkelton />}
                 </div>
+                <CompleteTasks show={showCompleteModal} showCompleteModal={showCompleteModalFunc} />
             </section >
         </>
     )
