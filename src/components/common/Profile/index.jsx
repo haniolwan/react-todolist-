@@ -3,9 +3,9 @@ import user from './../../../assets/dropdown/account.svg';
 import edit from './../../../assets/dropdown/edit-user.svg';
 import settings from './../../../assets/dropdown/settings.svg';
 import logout from './../../../assets/dropdown/sign-out.svg';
-import './style.css';
 import { useSelector } from 'react-redux';
 import logoutUser from '../../../utils/logout';
+import './style.css';
 
 
 const Profile = () => {

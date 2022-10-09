@@ -7,6 +7,7 @@ import TaskModal from "./Modals/Task";
 import Calender from "./Calender";
 import Tasks from "./Tasks";
 import Success from "./Alerts/Success";
+import Dropdown from "./Modals/Dropdown";
 
 export {
     Header,
@@ -16,5 +17,6 @@ export {
     Calender,
     DailyStatistics,
     TaskModal,
-    Success
+    Success,
+    Dropdown
 }

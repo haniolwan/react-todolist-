@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import Dropdown from './../Modals/Dropdown';
+import TodosSkelton from '../Skelton/TodosSkelton';
 import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
-import TodosSkelton from '../Skelton/TodosSkelton';
 import './style.css';
-
 
 const Tasks = () => {
     const [loading, setLoading] = useState(true);
@@ -14,53 +14,72 @@ const Tasks = () => {
     const [currPage, setCurrPage] = useState(1);
     const [prevPage, setPrevPage] = useState(0);
     const [lastList, setLastList] = useState(false);
+    const [clickedId, setClickedId] = useState(0);
+    const [filter, setFilter] = useState('');
     const listInnerRef = useRef();
+
+    const priorityColor = (priority) => {
+        if (priority === 'Urgent') {
+            return 'text-[#DA1E28]';
+        } else if (priority === 'Important') {
+            return 'text-[#FFE500]';
+        } else if (priority === 'Normal') {
+            return 'text-[#09DA37]';
+        }
+    }
+
+    const onScroll = () => {
+        if (listInnerRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+            if (((scrollTop + clientHeight) === scrollHeight) && !lastList) {
+                if (todos.length < 6) return
+                setCurrPage(currPage + 1)
+            }
+        }
+    }
+
     useEffect(() => {
-        try {
-            const source = axios.CancelToken.source();
-            const getTodos = async () => {
+        setLastList(false);
+        setCurrPage(1);
+        setPrevPage(0);
+        setTodos([]);
+        setClickedId(null)
+    }, [filter])
+
+    useEffect(() => {
+        const source = axios.CancelToken.source();
+        const getTodos = async () => {
+            try {
                 const { data: { data } } = await axios.get('/todo', {
-                    params: { page: currPage, limit: 6 }
+                    params: { page: currPage, limit: 6, priority: filter },
+                    cancelToken: source.token,
                 });
                 if (!data.length) {
                     setLastList(true)
                     return;
                 }
                 setPrevPage(currPage);
-                setTodos([...todos, ...data]);
-                setLoading(false)
+                setTodos(prevTodos => {
+                    return [...new Set([...prevTodos, ...data])]
+                });
+                setLoading(false);
+            } catch (error) {
+                if (axios.isCancel(error)) return
             }
-            if (!lastList && prevPage !== currPage) {
-                getTodos();
-            }
-            return () => {
-                source.cancel();
-            };
-        } catch (error) {
-            console.log(error)
         }
-    }, [currPage, lastList, prevPage, todos])
+        if ((!lastList && prevPage) !== currPage) {
+            getTodos();
+        }
+        return () => source.cancel();
+    }, [currPage, lastList, prevPage, filter, todos])
 
-    const priorityColor = (priority) => {
-        if (priority === 'Urgent') {
-            return 'text-[#DA1E28]';
-        } else if (priority === 'Improtant') {
-            return 'text-[#FFE500]';
-        } else {
-            return 'text-[#09DA37]';
-        }
+    const setClickId = () => {
+        return setClickedId(null)
     }
-    const onScroll = () => {
-        if (listInnerRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-            if ((scrollTop + clientHeight) === scrollHeight) {
-                setCurrPage(currPage + 1)
-            }
-        }
-    }
+
     return (
         <>
-            <section className="tasks-section bg-[#fff] w-4/5 ">
+            <section className="tasks-section bg-[#fff] w-4/5">
                 <div className="tasks-container">
                     <div className="tasks-header">
                         <h1>Tasks For This Day</h1>
@@ -74,22 +93,26 @@ const Tasks = () => {
                     <div className="status-buttons my-5">
                         <button
                             type="button"
-                            className="task-status-btn text-white bg-[#40a1fc] hover:bg-[#6fb8fc] font-medium rounded-lg text-sm px-3 py-1">
+                            className={`task-status-btn ${filter === '' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
+                            onClick={() => setFilter('')}>
                             All
                         </button>
                         <button
                             type="button"
-                            className="task-status-btn text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2] font-medium rounded-lg text-sm px-3 py-1">
+                            className={`task-status-btn ${filter === 'Urgent' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
+                            onClick={() => setFilter('Urgent')}>
                             Urgent
                         </button>
                         <button
                             type="button"
-                            className="task-status-btn text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2] font-medium rounded-lg text-sm px-3 py-1">
+                            className={`task-status-btn ${filter === 'Important' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
+                            onClick={() => setFilter('Important')}>
                             Important
                         </button>
                         <button
                             type="button"
-                            className="task-status-btn text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2] font-medium rounded-lg text-sm px-3 py-1">
+                            className={`task-status-btn ${filter === 'Normal' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
+                            onClick={() => setFilter('Normal')}>
                             Normal
                         </button>
                     </div>
@@ -98,9 +121,9 @@ const Tasks = () => {
                             onScroll={onScroll}
                             ref={listInnerRef}
                             className="overflow-y-scroll h-96">
-                            {todos.map((task) => {
+                            {todos.map((task, index) => {
                                 return (
-                                    <div key={task._id} className={`new-task flex justify-between items-center p-2${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
+                                    <div key={index} className={`new-task flex justify-between items-center p-2${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
                                         <div className="task-info">
                                             <label className="check-box-container">
                                                 <div>
@@ -115,19 +138,20 @@ const Tasks = () => {
                                                 <span className="checkmark"></span>
                                             </label>
                                         </div>
-                                        {task.state === 'open' ? <div className='flex gap-4 items-center'>
+                                        {task.state === 'open' ? (<div className='flex gap-4 items-center'>
                                             <div className='alert hover:bg-[#b4d8f7]'>
                                                 <img src={alert} alt="task alert" />
                                             </div>
-                                            <img className="h-6 w-6" src={kabab} alt="task kabab" />
-                                        </div>
-                                            :
-                                            <div className='flex items-center gap-3 mr-4'>
+                                            <div className="flex">
+                                                <img onClick={() => { setClickedId(task._id); }} className={`${task._id === clickedId && 'hidden'} h-6 w-6`} src={kabab} alt="task kabab" />
+                                                <Dropdown taskId={task._id} clickedId={clickedId} setClickId={() => setClickId} />
+                                            </div>
+                                        </div>) :
+                                            (<div className='flex items-center gap-3 mr-4'>
                                                 <img className="check-icon h-7 w-7" src={check} alt="task kabab" />
                                                 <span>Task Done</span>
-                                            </div>}
-                                    </div>
-                                )
+                                            </div>)}
+                                    </div>)
                             })}
                         </div>
                         : <TodosSkelton />}
