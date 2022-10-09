@@ -151,3 +151,7 @@
     display: flex;
     display: none;
 }
+
+.remove-btn {
+    margin-right: 0.5rem;
+}

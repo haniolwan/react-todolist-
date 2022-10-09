@@ -7,7 +7,7 @@ const Success = () => {
     if (title) {
         setTimeout(() => {
             setShow(false);
-        }, 3000)
+        }, 1000)
     }
     return (
         <div id="toast-success" className={`${title && show ? '' : 'hidden'} flex absolute top-10 items-center p-3 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800`} role="alert">

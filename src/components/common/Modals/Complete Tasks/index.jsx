@@ -2,15 +2,20 @@ import axios from "axios";
 import { useContext } from "react";
 import Notifications from "../../../../context/Notifications";
 
-const CompleteTasks = ({ show, showCompleteModal }) => {
+const CompleteTasks = ({ show, showCompleteModal, setTodos }) => {
     const { setTitle } = useContext(Notifications);
+
     const completeAll = async () => {
         try {
-
-            const { data: { message } } = await axios.post('/todo/completeAll');
+            const { data: { message } } = await axios.post('/todo');
+            setTodos((prevTodos) => prevTodos.map((todo) => {
+                todo.state = 'done';
+                return todo;
+            }))
             setTitle(message)
+            showCompleteModal();
         } catch (error) {
-            setTitle(error)
+            console.log(error)
         }
     }
     return (

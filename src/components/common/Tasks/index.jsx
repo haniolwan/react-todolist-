@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Dropdown from '../Modals/Dropdown';
+import CompleteTasks from '../Modals/Complete Tasks';
 import TodosSkelton from '../Skelton/TodosSkelton';
 import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
 import './style.css';
-
-import CompleteTasks from '../Modals/Complete Tasks';
+import Notifications from '../../../context/Notifications';
 
 const Tasks = () => {
     const [loading, setLoading] = useState(true);
@@ -20,6 +20,7 @@ const Tasks = () => {
     const [filter, setFilter] = useState('');
     const [showCompleteModal, setShowCompleteModal] = useState(false);
     const listInnerRef = useRef();
+    const { setTitle } = useContext(Notifications);
 
     const priorityColor = (priority) => {
         if (priority === 'Urgent') {
@@ -47,7 +48,8 @@ const Tasks = () => {
         setPrevPage(0);
         setTodos([]);
         setClickedId(null)
-    }, [filter])
+        setTitle('')
+    }, [filter, setTitle])
 
     useEffect(() => {
         const source = axios.CancelToken.source();
@@ -81,9 +83,23 @@ const Tasks = () => {
     }
 
     const showCompleteModalFunc = () => {
-        return setShowCompleteModal(null)
+        return setShowCompleteModal(false)
     }
 
+    const handleChange = async (event) => {
+        const { data: { message } } = await axios.post(`/todo/${event.target.name}`);
+        setTodos((prevTodos) => prevTodos.map((todo) => {
+            if (todo._id === event.target.name) {
+                if (event.target.checked && todo.state === 'done') {
+                    todo.state = 'open';
+                } else {
+                    todo.state = 'done';
+                }
+            }
+            return todo;
+        }))
+        setTitle(message)
+    }
 
     return (
         <>
@@ -130,9 +146,9 @@ const Tasks = () => {
                             onScroll={onScroll}
                             ref={listInnerRef}
                             className="overflow-y-scroll h-96">
-                            {todos.map((task, index) => {
+                            {todos.sort((a, b) => b.state.localeCompare(a.state)).map((task) => {
                                 return (
-                                    <div key={index} className={`new-task flex justify-between items-center p-2${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
+                                    <div key={task._id} className={`new-task flex justify-between items-center p-2${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
                                         <div className="task-info">
                                             <label className="check-box-container">
                                                 <div>
@@ -143,7 +159,7 @@ const Tasks = () => {
                                                         at {task.time}
                                                     </div>
                                                 </div>
-                                                <input type="checkbox" checked={task.state === 'done' ? true : undefined} disabled={task.state === 'done'} />
+                                                <input name={task._id} type="checkbox" checked={task.state === 'done'} onChange={handleChange} />
                                                 <span className="checkmark"></span>
                                             </label>
                                         </div>
@@ -153,7 +169,7 @@ const Tasks = () => {
                                             </div>
                                             <div className="flex">
                                                 <img onClick={() => { setClickedId(task._id); }} className={`${task._id === clickedId && 'hidden'} h-6 w-6`} src={kabab} alt="task kabab" />
-                                                <Dropdown taskId={task._id} clickedId={clickedId} setClickId={() => setClickId} />
+                                                <Dropdown setTodos={setTodos} taskId={task._id} clickedId={clickedId} setClickId={() => setClickId} />
                                             </div>
                                         </div>) :
                                             (<div className='flex items-center gap-3 mr-4'>
@@ -165,7 +181,7 @@ const Tasks = () => {
                         </div>
                         : <TodosSkelton />}
                 </div>
-                <CompleteTasks show={showCompleteModal} showCompleteModal={showCompleteModalFunc} />
+                <CompleteTasks show={showCompleteModal} showCompleteModal={showCompleteModalFunc} setTodos={setTodos} />
             </section >
         </>
     )
