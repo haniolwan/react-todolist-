@@ -3,7 +3,7 @@ import plus from './../../../assets/plus.svg';
 
 import './style.css';
 
-const Header = ({ hideModal }) => {
+const Header = ({ setShowModal }) => {
     return (
         <>
             <header className="header-container pt-4">
@@ -18,7 +18,7 @@ const Header = ({ hideModal }) => {
                         placeholder="Search for task" />
                 </div>
                 <button
-                    onClick={hideModal}
+                    onClick={() => setShowModal((show) => !show)}
                     type="button"
                     className="new-task-btn text-white bg-[#40A1FC] hover:bg-[#6fb8fc] font-medium rounded-lg text-sm px-3 py-2.5">
                     <img className="stroke-current w-3 side-arrow" src={plus} alt="side arrow" />

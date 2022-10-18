@@ -1,11 +1,16 @@
+import { useContext, useRef } from 'react';
 import axios from 'axios';
-import { useContext } from 'react';
 import Notifications from '../../../../context/Notifications';
+import SelectedTodoContext from '../../../../context/SelectedTodo';
+
 import './style.css'
+import useClickOutside from '../../../../hooks/useOnClickOutside';
 
 
-const Dropdown = ({ clickedId, taskId, setClickId, setTodos }) => {
+const Dropdown = ({ clickedId, taskId, setClickedId, setTodos, setShowModal }) => {
     const { setTitle } = useContext(Notifications)
+    const { setTodo } = useContext(SelectedTodoContext);
+
     const deleteTask = async (event) => {
         try {
             event.preventDefault();
@@ -33,12 +38,30 @@ const Dropdown = ({ clickedId, taskId, setClickId, setTodos }) => {
         }
     }
 
+    const editTask = (event) => {
+        try {
+            event.preventDefault();
+            setShowModal((show) => !show)
+            const getTodo = async () => {
+                const { data: { data } } = await axios.get(`/todo/${taskId}`);
+                setTodo(data)
+            }
+            getTodo();
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const dropDownRef = useRef();
+    useClickOutside(dropDownRef, () => setClickedId(false))
 
     return (
         (clickedId === taskId) &&
-        (<div id="dropdown" className={`shadow-2xl relative z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 bg-gray rounded-3xl`}>
+        (<div
+            ref={dropDownRef} id="dropdown" className={`shadow-2xl relative z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 bg-gray rounded-3xl`}>
             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 rounded-3xl" aria-labelledby="dropdownDefault">
-                <li onClick={setClickId()}>
+                <li onClick={() => setClickedId(null)}>
                     <span className="block py-2 px-4">X</span>
                 </li>
                 <li>
@@ -49,7 +72,11 @@ const Dropdown = ({ clickedId, taskId, setClickId, setTodos }) => {
                     >Complete</a>
                 </li>
                 <li>
-                    <a href="/" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                    <a
+                        onClick={(event) => editTask(event)}
+                        href="/"
+                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Edit</a>
                 </li>
                 <li>
                     <a

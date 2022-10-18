@@ -7,10 +7,11 @@ import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
+import NotificationsContext from '../../../context/Notifications';
+import TodosContext from '../../../context/Todos';
 import './style.css';
-import Notifications from '../../../context/Notifications';
 
-const Tasks = () => {
+const Tasks = ({ setShowModal }) => {
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -20,7 +21,8 @@ const Tasks = () => {
     const [filter, setFilter] = useState('');
     const [showCompleteModal, setShowCompleteModal] = useState(false);
     const listInnerRef = useRef();
-    const { setTitle } = useContext(Notifications);
+    const { setTitle } = useContext(NotificationsContext);
+    const { assignTodos } = useContext(TodosContext);
 
     const priorityColor = (priority) => {
         if (priority === 'Urgent') {
@@ -43,12 +45,10 @@ const Tasks = () => {
     }
 
     useEffect(() => {
+        setTodos([]);
         setLastList(false);
         setCurrPage(1);
         setPrevPage(0);
-        setTodos([]);
-        setClickedId(null)
-        setTitle('')
     }, [filter, setTitle])
 
     useEffect(() => {
@@ -64,8 +64,8 @@ const Tasks = () => {
                     return;
                 }
                 setPrevPage(currPage);
-                setTodos(prevTodos => {
-                    return [...new Set([...prevTodos, ...data])]
+                setTodos(() => {
+                    return [...new Set([...todos, ...data])]
                 });
                 setLoading(false);
             } catch (error) {
@@ -75,16 +75,9 @@ const Tasks = () => {
         if ((!lastList && prevPage) !== currPage) {
             getTodos();
         }
+        assignTodos(todos)
         return () => source.cancel();
-    }, [currPage, lastList, prevPage, filter, todos])
-
-    const setClickId = () => {
-        return setClickedId(null)
-    }
-
-    const showCompleteModalFunc = () => {
-        return setShowCompleteModal(false)
-    }
+    }, [currPage, lastList, prevPage, filter, todos, assignTodos])
 
     const handleChange = async (event) => {
         const { data: { message } } = await axios.post(`/todo/${event.target.name}`);
@@ -141,14 +134,14 @@ const Tasks = () => {
                             Normal
                         </button>
                     </div>
-                    {!loading ?
-                        <div
+                    {loading ?
+                        <TodosSkelton /> : (<div
                             onScroll={onScroll}
                             ref={listInnerRef}
                             className="overflow-y-scroll h-96">
-                            {todos.sort((a, b) => b.state.localeCompare(a.state)).map((task) => {
+                            {todos.map((task) => {
                                 return (
-                                    <div key={task._id} className={`new-task flex justify-between items-center p-2${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
+                                    <div key={task._id} className={`new-task flex justify-between items-center p-2 ${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
                                         <div className="task-info">
                                             <label className="check-box-container">
                                                 <div>
@@ -168,8 +161,18 @@ const Tasks = () => {
                                                 <img src={alert} alt="task alert" />
                                             </div>
                                             <div className="flex">
-                                                <img onClick={() => { setClickedId(task._id); }} className={`${task._id === clickedId && 'hidden'} h-6 w-6`} src={kabab} alt="task kabab" />
-                                                <Dropdown setTodos={setTodos} taskId={task._id} clickedId={clickedId} setClickId={() => setClickId} />
+                                                <img
+                                                    className={`${task._id === clickedId && 'hidden'} h-6 w-6`}
+                                                    src={kabab}
+                                                    alt="task kabab"
+                                                    onClick={() => setClickedId(task._id)} />
+                                                <Dropdown
+                                                    setTodos={setTodos}
+                                                    taskId={task._id}
+                                                    clickedId={clickedId}
+                                                    setClickedId={setClickedId}
+                                                    setShowModal={setShowModal}
+                                                />
                                             </div>
                                         </div>) :
                                             (<div className='flex items-center gap-3 mr-4'>
@@ -178,10 +181,10 @@ const Tasks = () => {
                                             </div>)}
                                     </div>)
                             })}
-                        </div>
-                        : <TodosSkelton />}
+                        </div>)
+                    }
                 </div>
-                <CompleteTasks show={showCompleteModal} showCompleteModal={showCompleteModalFunc} setTodos={setTodos} />
+                <CompleteTasks show={showCompleteModal} setShowCompleteModal={setShowCompleteModal} setTodos={setTodos} />
             </section >
         </>
     )

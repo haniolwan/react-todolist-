@@ -1,15 +1,25 @@
 import './style.scss';
 
 const Calender = () => {
+    const days = [
+        28, 29, 30, 31, 1, 2, 3,
+        4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17,
+        18, 19, 20, 21, 22, 23, 24,
+        25, 26, 27, 28, 29, 30, 31,
+        1, 2, 3, 4, 5, 6, 7
+    ]
+    const greyIndexes = [
+        0, 1, 2, 3, 35, 36, 37, 38, 39, 40, 41
+    ];
+    const date = new Date();
+    const [month, day, year] = [date.toLocaleString('default', { month: 'long' }), date.getDate(), date.getFullYear()];
     return (
         <div className="calendar">
             <div className="month">
-                <a href="/" className="nav">
-                    <i className="fas fa-angle-left"></i>
-                </a>
-                <div className="month-year">January <span className="year">2019</span>
-                </div><a href="/" className="nav">
-                    <i className="fas fa-angle-right"></i></a></div>
+                <div className="month-year">{month} <span className="year">{year}</span>
+                </div>
+            </div>
             <div className="days">
                 <span>Mon</span>
                 <span>Tue</span>
@@ -20,99 +30,15 @@ const Calender = () => {
                 <span>Sun</span>
             </div>
             <div className="dates">
-                <button>
-                    <time>1</time>
-                </button>
-                <button>
-                    <time>2</time>
-                </button>
-                <button>
-                    <time>3</time>
-                </button>
-                <button>
-                    <time>4</time>
-                </button>
-                <button>
-                    <time>5</time>
-                </button>
-                <button>
-                    <time>6</time>
-                </button>
-                <button>
-                    <time>7</time>
-                </button>
-                <button>
-                    <time>8</time>
-                </button>
-                <button>
-                    <time>9</time>
-                </button>
-                <button>
-                    <time>10</time>
-                </button>
-                <button>
-                    <time>11</time>
-                </button>
-                <button>
-                    <time>12</time>
-                </button>
-                <button>
-                    <time>13</time>
-                </button>
-                <button>
-                    <time>14</time>
-                </button>
-                <button>
-                    <time>15</time>
-                </button>
-                <button>
-                    <time>16</time>
-                </button>
-                <button>
-                    <time>17</time>
-                </button>
-                <button className="today">
-                    <time>18</time>
-                </button>
-                <button>
-                    <time>19</time>
-                </button>
-                <button>
-                    <time>20</time>
-                </button>
-                <button>
-                    <time>21</time>
-                </button>
-                <button>
-                    <time>22</time>
-                </button>
-                <button>
-                    <time>23</time>
-                </button>
-                <button>
-                    <time>24</time>
-                </button>
-                <button>
-                    <time>25</time>
-                </button>
-                <button>
-                    <time>26</time>
-                </button>
-                <button>
-                    <time>27</time>
-                </button>
-                <button>
-                    <time>28</time>
-                </button>
-                <button>
-                    <time>29</time>
-                </button>
-                <button>
-                    <time>30</time>
-                </button>
-                <button>
-                    <time>31</time>
-                </button>
+                {
+                    days.map((day, index) => {
+                        return (
+                            <button key={index}>
+                                <time className={`${greyIndexes.includes(index) && 'text-[#888888]'}`}>{day}</time>
+                            </button>
+                        )
+                    })
+                }
             </div>
         </div>
     );

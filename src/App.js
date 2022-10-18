@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import 'flowbite';
 import Login from './components/Pages/Login';
 import Home from './components/Pages/Home';
 import NotificationsContext from './context/Notifications';

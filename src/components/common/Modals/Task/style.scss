@@ -1,0 +1,160 @@
+.yellow-radio {
+  accent-color: chocolate;
+}
+
+.green-radio {
+  accent-color: green;
+}
+
+.violit-radio {
+  accent-color: blueviolet;
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s linear;
+}
+
+.task-color input[type="radio"] {
+  display: none;
+}
+
+.radio-button {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.radio-button span {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  background: #eeeeee;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: ease .3s;
+}
+
+.selected-color {
+  padding: 24px !important;
+}
+
+.orange .radio-button span {
+  background: #FF5722;
+}
+
+.amber .radio-button span {
+  background: #FFC107;
+}
+
+.lime .radio-button span {
+  background: #8BC34A;
+}
+
+.teal .radio-button span {
+  background: #009688;
+}
+
+.blue .radio-button span {
+  background: #2196F3;
+}
+
+.indigo .radio-button span {
+  background: #3F51B5;
+}
+
+.close-button {
+  opacity: 0.90;
+  filter: invert(47%) sepia(99%) saturate(7462%) hue-rotate(226deg) brightness(90%) contrast(86%);
+}
+
+.check-button {
+  filter: invert(100%) sepia(4%) saturate(1150%) hue-rotate(238deg) brightness(120%) contrast(92%);
+}
+
+
+.urgent-btn:hover img {
+  filter: invert(10%) sepia(95%) saturate(6384%) hue-rotate(360deg) brightness(113%) contrast(112%);
+}
+
+.important-btn:hover img {
+  filter: invert(76%) sepia(87%) saturate(560%) hue-rotate(360deg) brightness(104%) contrast(104%);
+}
+
+.normal-btn:hover img {
+  filter: invert(49%) sepia(98%) saturate(520%) hue-rotate(84deg) brightness(105%) contrast(101%);
+}
+
+.urgent-btn:focus {
+  color: #FF0000;
+  background: #F6DDDD;
+
+  img {
+    filter: invert(10%) sepia(95%) saturate(6384%) hue-rotate(360deg) brightness(113%) contrast(112%);
+  }
+}
+
+.important-btn:focus,
+.important-btn:checked {
+  color: #FFE500;
+  background: #F6F4DD;
+
+  img {
+    filter: invert(76%) sepia(87%) saturate(560%) hue-rotate(360deg) brightness(104%) contrast(104%);
+  }
+}
+
+.normal-btn:focus {
+  color: #09DA37;
+  background: #DEF3E3;
+
+  img {
+    filter: invert(49%) sepia(98%) saturate(520%) hue-rotate(84deg) brightness(105%) contrast(101%);
+  }
+}
+
+.urgent-btn-checked {
+  color: #FF0000;
+  background: #F6DDDD;
+
+  img {
+    filter: invert(10%) sepia(95%) saturate(6384%) hue-rotate(360deg) brightness(113%) contrast(112%);
+  }
+}
+
+.important-btn-checked {
+  color: #FFE500;
+  background: #F6F4DD;
+
+  img {
+    filter: invert(76%) sepia(87%) saturate(560%) hue-rotate(360deg) brightness(104%) contrast(104%);
+  }
+}
+
+.normal-btn-checked {
+  color: #09DA37;
+  background: #DEF3E3;
+
+  img {
+    filter: invert(49%) sepia(98%) saturate(520%) hue-rotate(84deg) brightness(105%) contrast(101%);
+  }
+}
+
+.date-pickers input {
+  width: 50%;
+  border: 1px solid gray;
+}
