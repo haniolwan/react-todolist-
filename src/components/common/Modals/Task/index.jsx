@@ -10,42 +10,8 @@ import checked from './../../../../assets/checked.svg';
 import './style.scss';
 
 
-
-function getInputErrorKeys(object, value) {
-    const arr = [];
-    Object.keys(object).forEach(key => {
-        if (object[key] === value) {
-            arr.push(key);
-        }
-    });
-    return arr;
-}
-
-function timeConvert(time) {
-    let [h, m] = time.split(":");
-    let a = ((h % 12 + 12 * (h % 12 === 0)) + ":" + m) + " ";
-    if (h >= 12) {
-        a += 'PM';
-    } else {
-        a += 'AM';
-    }
-    return a;
-}
-
-const convertTime12to24 = (time12h) => {
-    const [time, modifier] = time12h.split(' ');
-    let [hours, minutes] = time.split(':');
-    if (hours === '12') {
-        hours = '00';
-    }
-    if (modifier === 'PM') {
-        hours = parseInt(hours, 10) + 12;
-    }
-    return `${hours}:${minutes}`;
-}
-
 const TaskModal = ({ show, setShowModal }) => {
-    const { todo } = useContext(SelectedTodoContext);
+
     const initialData = useMemo(() => ({
         title: '',
         priority: 'Normal',
@@ -56,14 +22,14 @@ const TaskModal = ({ show, setShowModal }) => {
         motivation: ''
     }), [])
 
-    const [data, setData] = useState(initialData);
-    const [id, setId] = useState(todo._id);
-    const [error, setError] = useState({
-        title: false,
-        color: false,
-        date: false,
-        time: false
-    });
+    const { todo } = useContext(SelectedTodoContext);
+
+    useEffect(() => {
+        setData(initialData)
+        setId(0)
+    }, [show, initialData])
+
+
 
     useEffect(() => {
         if (Object.keys(todo).length === 0) {
@@ -93,6 +59,49 @@ const TaskModal = ({ show, setShowModal }) => {
             })
         }
     }, [initialData, todo])
+
+    const [data, setData] = useState(initialData);
+    const [id, setId] = useState(todo._id);
+    const [error, setError] = useState({
+        title: false,
+        color: false,
+        date: false,
+        time: false
+    });
+
+    const getInputErrorKeys = (object, value) => {
+        const arr = [];
+        Object.keys(object).forEach(key => {
+            if (object[key] === value) {
+                arr.push(key);
+            }
+        });
+        return arr;
+    }
+
+    const timeConvert = (time) => {
+        let [h, m] = time.split(":");
+        let a = ((h % 12 + 12 * (h % 12 === 0)) + ":" + m) + " ";
+        if (h >= 12) {
+            a += 'PM';
+        } else {
+            a += 'AM';
+        }
+        return a;
+    }
+
+    const convertTime12to24 = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+        if (hours === '12') {
+            hours = '00';
+        }
+        if (modifier === 'PM') {
+            hours = parseInt(hours, 10) + 12;
+        }
+        return `${hours}:${minutes}`;
+    }
+
     const { setTitle } = useContext(Notifications);
 
     const createTodo = async () => {
@@ -154,11 +163,7 @@ const TaskModal = ({ show, setShowModal }) => {
             setData({ ...data, [name]: value })
         }
     }
-    useEffect(() => {
-        setData(initialData)
-        setId(0)
-    }, [show, initialData])
-    
+
     const modalRef = useRef();
     useOnClickOutside(modalRef, () => setShowModal(false))
 
@@ -397,7 +402,7 @@ const TaskModal = ({ show, setShowModal }) => {
                         <button
                             onClick={() => setShowModal((show) => !show)}
                             type="button"
-                            className="inline-block px-6 py-2.5 text-dark font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                            className="inline-block px-6 py-2.5 text-dark font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
                             data-bs-dismiss="modal">Cancel
                         </button>
                         {!id ? <button

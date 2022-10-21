@@ -1,17 +1,22 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+    useContext,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import axios from 'axios';
 import Dropdown from '../Modals/Dropdown';
 import CompleteTasks from '../Modals/Complete Tasks';
 import TodosSkelton from '../Skelton/TodosSkelton';
+import NotificationsContext from '../../../context/Notifications';
+import TodosContext from '../../../context/Todos';
 import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
-import NotificationsContext from '../../../context/Notifications';
-import TodosContext from '../../../context/Todos';
 import './style.css';
 
-const Tasks = ({ search, setShowModal }) => {
+const Tasks = ({ search, date, setShowModal }) => {
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -24,39 +29,19 @@ const Tasks = ({ search, setShowModal }) => {
     const { setTitle } = useContext(NotificationsContext);
     const { assignTodos } = useContext(TodosContext);
 
-    const priorityColor = (priority) => {
-        if (priority === 'Urgent') {
-            return 'text-[#DA1E28]';
-        } else if (priority === 'Important') {
-            return 'text-[#FFE500]';
-        } else if (priority === 'Normal') {
-            return 'text-[#09DA37]';
-        }
-    }
-
-    const onScroll = () => {
-        if (listInnerRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-            if (((scrollTop + clientHeight) === scrollHeight) && !lastList) {
-                if (todos.length < 6) return
-                setCurrPage(currPage + 1)
-            }
-        }
-    }
-
     useEffect(() => {
         setTodos([]);
         setLastList(false);
         setCurrPage(1);
         setPrevPage(0);
-    }, [filter, setTitle, search])
+    }, [filter, setTitle, search, date])
 
     useEffect(() => {
         const source = axios.CancelToken.source();
         const getTodos = async () => {
             try {
                 const { data: { data } } = await axios.get('/todo', {
-                    params: { page: currPage, limit: 6, priority: filter, search },
+                    params: { page: currPage, limit: 6, priority: filter, search, date },
                     cancelToken: source.token,
                 });
                 if (!data.length) {
@@ -85,7 +70,28 @@ const Tasks = ({ search, setShowModal }) => {
         todos,
         assignTodos,
         search,
+        date
     ])
+
+    const priorityColor = (priority) => {
+        if (priority === 'Urgent') {
+            return 'text-[#DA1E28]';
+        } else if (priority === 'Important') {
+            return 'text-[#FFE500]';
+        } else if (priority === 'Normal') {
+            return 'text-[#09DA37]';
+        }
+    }
+
+    const onScroll = () => {
+        if (listInnerRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+            if (((scrollTop + clientHeight) === scrollHeight) && !lastList) {
+                if (todos.length < 6) return
+                setCurrPage(currPage + 1)
+            }
+        }
+    }
 
     const handleChange = async (event) => {
         const { data: { message } } = await axios.post(`/todo/${event.target.name}`);
@@ -192,7 +198,10 @@ const Tasks = ({ search, setShowModal }) => {
                         </div>)
                     }
                 </div>
-                <CompleteTasks show={showCompleteModal} setShowCompleteModal={setShowCompleteModal} setTodos={setTodos} />
+                <CompleteTasks
+                    show={showCompleteModal}
+                    setShowCompleteModal={setShowCompleteModal}
+                    setTodos={setTodos} />
             </section >
         </>
     )

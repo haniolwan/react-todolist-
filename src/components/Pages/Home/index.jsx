@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import TodosContext from '../../../context/Todos';
 import SelectedTodoContext from '../../../context/SelectedTodo';
@@ -25,6 +25,10 @@ const Home = () => {
     }
     const [search, setSearch] = useState('');
     const [todo, setTodo] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const date = new Date();
+        return ((parseInt(date.getMonth()) + 1) + '-' + date.getDate())
+    });
     return (
         user.isAuthorized ?
             <>
@@ -38,11 +42,10 @@ const Home = () => {
                 <TodosContext.Provider value={{ todos, assignTodos }}>
                     <div className="flex gap-5 mr-14">
                         <SelectedTodoContext.Provider value={{ todo, setTodo }}>
-                            
-                            <Tasks search={search} showModal={showModal} setShowModal={setShowModal} />
+                            <Tasks search={search} date={selectedDate} showModal={showModal} setShowModal={setShowModal} />
                             <div className='flex flex-col'>
                                 <Success />
-                                <Calender />
+                                <Calender setSelectedDate={setSelectedDate} />
                                 <DailyStatistics />
                             </div>
                             <TaskModal show={showModal} setShowModal={setShowModal} />

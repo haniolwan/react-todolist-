@@ -1,6 +1,9 @@
 import './style.scss';
 
-const Calender = () => {
+const Calender = ({ setSelectedDate }) => {
+
+    const date = new Date();
+    const [month, day, year] = [date.toLocaleString('default', { month: 'long' }), date.getDate(), date.getFullYear()];
     const days = [
         28, 29, 30, 31, 1, 2, 3,
         4, 5, 6, 7, 8, 9, 10,
@@ -8,12 +11,21 @@ const Calender = () => {
         18, 19, 20, 21, 22, 23, 24,
         25, 26, 27, 28, 29, 30, 31,
         1, 2, 3, 4, 5, 6, 7
-    ]
-    const greyIndexes = [
-        0, 1, 2, 3, 35, 36, 37, 38, 39, 40, 41
     ];
-    const date = new Date();
-    const [month, day, year] = [date.toLocaleString('default', { month: 'long' }), date.getDate(), date.getFullYear()];
+    const greyIndexes = [0, 1, 2, 3, 35, 36, 37, 38, 39, 40, 41];
+
+    const selectDate = (day, index) => {
+        if (index > 3 && index < 35) {
+            setSelectedDate(parseInt(date.getMonth() + 1) + '-' + day);
+        }
+        if (index < 4) {
+            setSelectedDate(parseInt(date.getMonth()) + '-' + day);
+        }
+        if (index > 34) {
+            setSelectedDate(parseInt(date.getMonth() + 2) + '-' + day);
+        }
+    }
+
     return (
         <div className="calendar">
             <div className="month">
@@ -31,10 +43,12 @@ const Calender = () => {
             </div>
             <div className="dates">
                 {
-                    days.map((day, index) => {
+                    days.map((date, index) => {
                         return (
-                            <button key={index}>
-                                <time className={`${greyIndexes.includes(index) && 'text-[#888888]'}`}>{day}</time>
+                            <button
+                                onClick={() => selectDate(date, index)}
+                                className={`${(date === day) && 'selected'}`} key={index}>
+                                <time className={`num-color ${greyIndexes.includes(index) && 'text-[#888888]'}`}>{date}</time>
                             </button>
                         )
                     })

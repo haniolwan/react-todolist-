@@ -83,19 +83,25 @@
                 color: #fff;
             }
 
-            // &:first-child {
-            //     grid-column: 3;
-            // }
-
             &:hover {
                 background: #eee;
                 color: #000;
             }
 
             &:focus {
-                background: #40A1FC;
+                background: #40A1FC !important;
                 color: #fff;
                 font-weight: 600;
+            }
+
+            &.selected {
+                background: gray;
+                color: #fff;
+                font-weight: 600;
+
+                .num-color {
+                    color: #fff !important;
+                }
             }
         }
     }
