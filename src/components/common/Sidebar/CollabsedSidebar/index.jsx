@@ -25,15 +25,6 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                     </g>
                 </svg>
             </Link>
-            <Link to={'/statistics'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/statistics' && 'bg-gray-300'}`}>
-                <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g opacity="">
-                        <path d="M20 26V11" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M11 26V2" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M2 26V17" stroke="" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                    </g>
-                </svg>
-            </Link>
             <Link to={'/notifications'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/notifications' && 'bg-gray-300'}`}>
                 <svg className="stroke-current" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="">

@@ -16,7 +16,7 @@ import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
 import './style.css';
 
-const Tasks = ({ search, date, setShowModal }) => {
+const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -34,7 +34,11 @@ const Tasks = ({ search, date, setShowModal }) => {
         setLastList(false);
         setCurrPage(1);
         setPrevPage(0);
-    }, [filter, setTitle, search, date])
+    }, [filter,
+        setTitle,
+        search,
+        date,
+        showTaskModal])
 
     useEffect(() => {
         const source = axios.CancelToken.source();
@@ -70,7 +74,8 @@ const Tasks = ({ search, date, setShowModal }) => {
         todos,
         assignTodos,
         search,
-        date
+        date,
+        showTaskModal
     ])
 
     const priorityColor = (priority) => {
@@ -110,9 +115,9 @@ const Tasks = ({ search, date, setShowModal }) => {
 
     return (
         <>
-            <section className="tasks-section bg-[#fff] w-4/5">
+            <section className="tasks-section bg-[#fff] w-4/5 h-full">
                 <div className="tasks-container">
-                    <div className="tasks-header">
+                    <div className="tasks-header p-5 pb-0">
                         <h1>Tasks For This Day</h1>
                         <button
                             onClick={() => setShowCompleteModal(true)}
@@ -122,7 +127,7 @@ const Tasks = ({ search, date, setShowModal }) => {
                             Complete All
                         </button>
                     </div>
-                    <div className="status-buttons my-5">
+                    <div className="status-buttons p-5">
                         <button
                             type="button"
                             className={`task-status-btn ${filter === '' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
@@ -152,10 +157,10 @@ const Tasks = ({ search, date, setShowModal }) => {
                         <TodosSkelton /> : (<div
                             onScroll={onScroll}
                             ref={listInnerRef}
-                            className="overflow-y-scroll h-96">
+                            className="todos-scroll overflow-y-scroll h-96">
                             {todos.map((task) => {
                                 return (
-                                    <div key={task._id} className={`new-task flex justify-between items-center p-2 ${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
+                                    <div key={task._id} className={`new-task flex justify-between items-center px-5 py-1 ${task.state === 'done' ? 'bg-[#F3FDF5]' : "bg-[#fff]"}`}>
                                         <div className="task-info">
                                             <label className="check-box-container">
                                                 <div>
@@ -185,7 +190,7 @@ const Tasks = ({ search, date, setShowModal }) => {
                                                     taskId={task._id}
                                                     clickedId={clickedId}
                                                     setClickedId={setClickedId}
-                                                    setShowModal={setShowModal}
+                                                    setShowModal={setShowTaskModal}
                                                 />
                                             </div>
                                         </div>) :

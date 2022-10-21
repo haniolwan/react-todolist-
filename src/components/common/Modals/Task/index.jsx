@@ -29,8 +29,6 @@ const TaskModal = ({ show, setShowModal }) => {
         setId(0)
     }, [show, initialData])
 
-
-
     useEffect(() => {
         if (Object.keys(todo).length === 0) {
             setData(initialData);
