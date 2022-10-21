@@ -11,7 +11,7 @@ import NotificationsContext from '../../../context/Notifications';
 import TodosContext from '../../../context/Todos';
 import './style.css';
 
-const Tasks = ({ setShowModal }) => {
+const Tasks = ({ search, setShowModal }) => {
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -49,14 +49,14 @@ const Tasks = ({ setShowModal }) => {
         setLastList(false);
         setCurrPage(1);
         setPrevPage(0);
-    }, [filter, setTitle])
+    }, [filter, setTitle, search])
 
     useEffect(() => {
         const source = axios.CancelToken.source();
         const getTodos = async () => {
             try {
                 const { data: { data } } = await axios.get('/todo', {
-                    params: { page: currPage, limit: 6, priority: filter },
+                    params: { page: currPage, limit: 6, priority: filter, search },
                     cancelToken: source.token,
                 });
                 if (!data.length) {
@@ -77,7 +77,15 @@ const Tasks = ({ setShowModal }) => {
         }
         assignTodos(todos)
         return () => source.cancel();
-    }, [currPage, lastList, prevPage, filter, todos, assignTodos])
+    }, [
+        currPage,
+        lastList,
+        prevPage,
+        filter,
+        todos,
+        assignTodos,
+        search,
+    ])
 
     const handleChange = async (event) => {
         const { data: { message } } = await axios.post(`/todo/${event.target.name}`);

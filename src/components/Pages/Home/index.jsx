@@ -23,6 +23,7 @@ const Home = () => {
     const showCollabsedSidebar = (sidebar) => {
         setSidebarShow(sidebar)
     }
+    const [search, setSearch] = useState('');
     const [todo, setTodo] = useState(false);
     return (
         user.isAuthorized ?
@@ -32,12 +33,13 @@ const Home = () => {
                         <FullSidebar showCollabsed={showCollabsedSidebar} /> :
                         <CollabsedSidebar showCollabsed={showCollabsedSidebar} />
                 }
-                <Header setShowModal={setShowModal} />
+                <Header setShowModal={setShowModal} setSearch={setSearch} search={search} />
                 <h1 className="tasks-title">Tasks</h1>
                 <TodosContext.Provider value={{ todos, assignTodos }}>
                     <div className="flex gap-5 mr-14">
                         <SelectedTodoContext.Provider value={{ todo, setTodo }}>
-                            <Tasks showModal={showModal} setShowModal={setShowModal} />
+                            
+                            <Tasks search={search} showModal={showModal} setShowModal={setShowModal} />
                             <div className='flex flex-col'>
                                 <Success />
                                 <Calender />

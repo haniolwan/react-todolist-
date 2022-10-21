@@ -1,9 +1,13 @@
 import Profile from '../Profile';
 import plus from './../../../assets/plus.svg';
-
 import './style.css';
 
-const Header = ({ setShowModal }) => {
+
+const Header = ({ setShowModal, setSearch, search }) => {
+
+    const handleInput = ({ target: { value } }) => {
+        return setSearch(value)
+    }
     return (
         <>
             <header className="header-container pt-4">
@@ -12,8 +16,11 @@ const Header = ({ setShowModal }) => {
                     <p>Take a look for your tasks today</p>
                 </div>
                 <div>
-                    <input type="text"
-                        id="first_name"
+                    <input
+                        onChange={handleInput}
+                        value={search}
+                        type="text"
+                        id="search"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search for task" />
                 </div>
