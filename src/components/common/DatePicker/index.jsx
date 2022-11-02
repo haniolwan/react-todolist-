@@ -1,6 +1,6 @@
 import './style.scss';
 
-const Calender = ({ setSelectedDate }) => {
+const DatePicker = ({ setSelectedDate }) => {
 
     const date = new Date();
     const [month, day, year] = [date.toLocaleString('default', { month: 'long' }), date.getDate(), date.getFullYear()];
@@ -58,4 +58,4 @@ const Calender = ({ setSelectedDate }) => {
     );
 }
 
-export default Calender;
+export default DatePicker;

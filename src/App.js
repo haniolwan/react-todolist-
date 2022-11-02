@@ -4,8 +4,6 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Login from './components/Pages/Login';
-import Home from './components/Pages/Home';
 import NotificationsContext from './context/Notifications';
 import { useEffect, useState } from 'react';
 import store from './redux/app/store';
@@ -18,9 +16,18 @@ import {
   TaskModal
 } from './components/common';
 import SelectedTodoContext from './context/SelectedTodo';
+import {
+  Login,
+  Home,
+  Calender,
+  Notification,
+  Settings
+} from './components/Pages';
+import './firebase.js';
 
 
 const App = () => {
+
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [sidebarShow, setSidebarShow] = useState("full");
@@ -30,11 +37,14 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [todo, setTodo] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const date = new Date();
+    return ((parseInt(date.getMonth()) + 1) + '-' + date.getDate())
+  });
 
   useEffect(() => {
     store.dispatch(getUserData());
   }, [])
-
 
   return (
     <>
@@ -49,11 +59,11 @@ const App = () => {
           <TaskModal show={showTaskModal} setShowModal={setShowTaskModal} />
           <Success />
           <Routes>
-            <Route path="/calender" element={<div>Calender Page</div>} />
             <Route path="/statistics" element={<div>Statistics Page</div>} />
-            <Route path="/notifications" element={<div>Notifications Page</div>} />
-            <Route path="/settings" element={<div>Settings Page</div>} />
-            <Route path="/" element={<Home search={search} showTaskModal={showTaskModal} setShowTaskModal={setShowTaskModal} />} />
+            <Route path="/notifications" element={<Notification />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/calender" element={<Calender search={search} showTaskModal={showTaskModal} setShowTaskModal={setShowTaskModal} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />} />
+            <Route path="/" element={<Home search={search} showTaskModal={showTaskModal} setShowTaskModal={setShowTaskModal} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={
               <h1>

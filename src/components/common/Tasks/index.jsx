@@ -14,9 +14,9 @@ import check from './../../../assets/check.svg';
 import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
-import './style.css';
+import './style.scss';
 
-const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
+const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -37,15 +37,17 @@ const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
     }, [filter,
         setTitle,
         search,
-        date,
-        showTaskModal])
+        selectedDate,
+        showTaskModal,
+    ])
+
 
     useEffect(() => {
         const source = axios.CancelToken.source();
         const getTodos = async () => {
             try {
                 const { data: { data } } = await axios.get('/todo', {
-                    params: { page: currPage, limit: 6, priority: filter, search, date },
+                    params: { page: currPage, limit: 6, priority: filter, search, date: selectedDate },
                     cancelToken: source.token,
                 });
                 if (!data.length) {
@@ -74,8 +76,8 @@ const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
         todos,
         assignTodos,
         search,
-        date,
-        showTaskModal
+        selectedDate,
+        showTaskModal,
     ])
 
     const priorityColor = (priority) => {
@@ -111,6 +113,15 @@ const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
             return todo;
         }))
         setTitle(message)
+    }
+
+    const setAlert = async (taskId, notification) => {
+        try {
+            const { data: { message } } = await axios.post(`/todo/${taskId}/setAlert`, { notification });
+            setTitle(message)
+        } catch ({ response: { data: { message } } }) {
+            setTitle(message)
+        }
     }
 
     return (
@@ -176,7 +187,9 @@ const Tasks = ({ search, date, showTaskModal, setShowTaskModal }) => {
                                             </label>
                                         </div>
                                         {task.state === 'open' ? (<div className='flex gap-4 items-center'>
-                                            <div className='alert hover:bg-[#b4d8f7]'>
+                                            <div
+                                                onClick={() => setAlert(task._id, task.notification)}
+                                                className={`${(task.notification) ? 'alerted' : ''} alert hover:bg-[#b4d8f7]`}>
                                                 <img src={alert} alt="task alert" />
                                             </div>
                                             <div className="flex">

@@ -11,6 +11,7 @@ import logo from './../../../assets/login-logo.png';
 import './style.css';
 import { Success } from '../../common';
 import logoutUser from '../../../utils/logout';
+import { getTokenn } from '../../../firebase';
 
 const Login = () => {
     const [user, setUser] = useState({ email: "", password: "" })
@@ -21,6 +22,7 @@ const Login = () => {
     const { setTitle } = useContext(NotificationsContext);
     const dispatch = useDispatch();
     const { userData } = useSelector((state) => state.user);
+    const [notifyToken, setNotifyToken] = useState('');
 
     const validator = (inputField, input) => {
         let isValid = true;
@@ -60,8 +62,9 @@ const Login = () => {
             if (email && password) {
                 const { data: { data: { user: loggedUser, token, message } } } = await axios.post('login', {
                     email: user.email,
-                    password: user.password
+                    password: user.password,
                 });
+                getTokenn(setNotifyToken, loggedUser.id)
                 dispatch(sign({ ...loggedUser, token }));
                 setCookie("user", token, {
                     path: "/"
@@ -75,7 +78,7 @@ const Login = () => {
         }
     }
 
- 
+
     return (
         <>
             <div className="login column-2 flex justify-between">

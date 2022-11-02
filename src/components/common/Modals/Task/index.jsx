@@ -18,16 +18,18 @@ const TaskModal = ({ show, setShowModal }) => {
         color: '',
         category: [],
         time: '',
-        notification: '',
+        notification: false,
         motivation: ''
     }), [])
 
     const { todo } = useContext(SelectedTodoContext);
+    const [notificationError, setNotificationError] = useState(false)
 
     useEffect(() => {
         setData(initialData)
         setId(0)
-    }, [show, initialData])
+        setNotificationError(false)
+    }, [show, initialData,setNotificationError])
 
     useEffect(() => {
         if (Object.keys(todo).length === 0) {
@@ -116,7 +118,7 @@ const TaskModal = ({ show, setShowModal }) => {
             if (title && color && date && time) {
                 const { data: { message } } = await axios.post('/todo/create', {
                     ...data,
-                    time: timeConvert(data.time)
+                    time: (data.time)
                 });
                 setShowModal(false);
                 setTitle(message);
@@ -140,13 +142,13 @@ const TaskModal = ({ show, setShowModal }) => {
             if (title && color && date && time) {
                 const { data: { message } } = await axios.put(`/todo/${id}`, {
                     ...data,
-                    time: timeConvert(data.time)
+                    time: (data.time)
                 });
                 setShowModal(false);
                 setTitle(message);
             }
         } catch (error) {
-            console.log(error)
+            setNotificationError(true)
         }
     }
 
@@ -154,10 +156,14 @@ const TaskModal = ({ show, setShowModal }) => {
         if (name === 'category') {
             if (value) {
                 setData({ ...data, [name]: [...new Set([...data.category, value])] });
-            } else {
-                return;
             }
-        } else {
+            return;
+        }
+        if (name === 'notification') {
+            setData({ ...data, [name]: !data.notification });
+            return;
+        }
+        else {
             setData({ ...data, [name]: value })
         }
     }
@@ -365,21 +371,31 @@ const TaskModal = ({ show, setShowModal }) => {
                             </p>}
                         </div>
                         {/* Notification */}
-                        <div className="mt-3 flex justify-between items-start">
-                            <div className="flex gap-2 items-center">
-                                <span>Get Notification</span>
-                                <img className="h-5 w-5" src={bell} alt="bell" />
-                            </div>
-                            <div>
-                                <label htmlFor="default-toggle" className="inline-flex relative items-center cursor-pointer">
-                                    <input
-                                        onChange={handleInput}
-                                        name="notification"
-                                        type="checkbox"
-                                        id="default-toggle"
-                                        className="sr-only peer" />
-                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                </label>
+                        <div className="mt-3 flex justify-between flex-col">
+                            {notificationError && <p className="pb-1 text-red-700 font-light">
+                                Cannot set notification to ended todo
+                            </p>}
+                            <div className="flex justify-between">
+                                <div className="flex gap-2 items-center">
+                                    <span>Get Notification</span>
+                                    <img
+                                        className='h-5 w-5'
+                                        src={bell}
+                                        alt="bell" />
+
+                                </div>
+                                <div>
+                                    <label htmlFor="default-toggle" className="inline-flex relative items-center cursor-pointer">
+                                        <input
+                                            onChange={handleInput}
+                                            defaultChecked={todo.notification}
+                                            name="notification"
+                                            type="checkbox"
+                                            id="default-toggle"
+                                            className="sr-only peer" />
+                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 mt-2">

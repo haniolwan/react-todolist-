@@ -4,7 +4,7 @@ import Header from "./Header";
 import CollabsedSidebar from "./Sidebar/CollabsedSidebar";
 import FullSidebar from "./Sidebar/FullSidebar";
 import TaskModal from "./Modals/Task";
-import Calender from "./Calender";
+import DatePicker from "./DatePicker";
 import Tasks from "./Tasks";
 import Success from "./Alerts/Success";
 import Dropdown from "./Modals/Dropdown";
@@ -16,7 +16,7 @@ export {
     FullSidebar,
     CollabsedSidebar,
     Tasks,
-    Calender,
+    DatePicker,
     DailyStatistics,
     TaskModal,
     Success,

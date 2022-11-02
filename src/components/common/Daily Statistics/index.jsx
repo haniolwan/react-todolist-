@@ -4,7 +4,7 @@ import { useSpring, animated } from 'react-spring';
 import TodosContext from '../../../context/Todos';
 import StatsSkelton from '../Skelton/StatsSkelton';
 import useMeasure from 'react-use-measure'
-import './styles.scss';
+import './style.scss';
 
 const DailyStatistics = () => {
     const [loading, setLoading] = useState(true)
@@ -41,9 +41,9 @@ const DailyStatistics = () => {
 
     const [ref, { width }] = useMeasure()
     const props = useSpring({
-        from: { width: 0 },
-        to: { width: width * parseInt(stats.completionRate) / 100 },
-        config: { duration: 1200 }
+        from: { width: 0, backgroundColor: '#40A1FC' },
+        to: { width: width * parseInt(stats.completionRate) / 100, backgroundColor: "#b8d9f8" },
+        config: { duration: 1200 },
     })
 
     return (

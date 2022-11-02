@@ -1,7 +1,6 @@
 .c-stats-container {
   position: relative;
   height: 40px;
-  cursor: pointer;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -14,7 +13,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #D1E8FE;
   }
 
   .content {
