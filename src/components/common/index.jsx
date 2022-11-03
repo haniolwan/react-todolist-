@@ -10,6 +10,7 @@ import Success from "./Alerts/Success";
 import Dropdown from "./Modals/Dropdown";
 import CompleteTasks from "./Modals/Complete Tasks";
 import StatsSkelton from "./Skelton/StatsSkelton";
+import ChangePassword from "./Modals/Change Password";
 
 export {
     Header,
@@ -22,5 +23,6 @@ export {
     Success,
     Dropdown,
     CompleteTasks,
-    StatsSkelton
+    StatsSkelton,
+    ChangePassword
 }

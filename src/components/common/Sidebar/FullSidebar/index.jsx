@@ -41,7 +41,7 @@ const FullSidebar = ({ showCollabsed }) => {
 						<span className="ml-2 text-sm font-medium">Notifications</span>
 						<span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
 					</Link>
-					<Link to={'/settings'} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
+					<Link to={'/settings/account'} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
 						<svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g opacity="">
 								<path d="M11.5 14.0909C12.9309 14.0909 14.0909 12.9309 14.0909 11.5C14.0909 10.069 12.9309 8.90906 11.5 8.90906C10.0691 8.90906 8.90912 10.069 8.90912 11.5C8.90912 12.9309 10.0691 14.0909 11.5 14.0909Z" stroke="" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />

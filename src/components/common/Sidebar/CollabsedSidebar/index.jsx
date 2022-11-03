@@ -34,7 +34,7 @@ const CollabsedSidebar = ({ showCollabsed }) => {
                 </svg>
             </Link>
             <div className="flex flex-col items-center mt-2 border-t border-gray-300">
-                <Link to={'/settings'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/settings' && 'bg-gray-300'}`}>
+                <Link to={'/settings/account'} className={`flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-300 ${pathname === '/settings' && 'bg-gray-300'}`}>
                     <svg className="stroke-current" width="22" height="24" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="">
                             <path d="M11.5 14.0909C12.9309 14.0909 14.0909 12.9309 14.0909 11.5C14.0909 10.069 12.9309 8.90906 11.5 8.90906C10.0691 8.90906 8.90912 10.069 8.90912 11.5C8.90912 12.9309 10.0691 14.0909 11.5 14.0909Z" stroke="" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />

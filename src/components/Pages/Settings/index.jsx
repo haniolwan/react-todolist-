@@ -1,37 +1,46 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+    Outlet,
+    useNavigate,
+    Link
+} from "react-router-dom";
+import './style.scss';
 
 const Settings = () => {
+    const [selected, setSelected] = useState('account');
+
     const navigate = useNavigate();
     return (
-        <section>
-            <h1>Settings</h1>
+        <><section>
+            <h1 className="tasks-title">Settings</h1>
             <div>
-                <ul className="flex">
-                    <li className="mr-6">
-                        <a className="text-blue-500 hover:text-blue-800" href="/settings/s"
-                            onClick={
-                                (event) => {
-                                    event.preventDefault();
-                                    navigate('/settings/s')
-                                }
-                            }
-                        >Active</a>
+                <ul className="flex gap-8">
+                    <li className="mr-6 text-[#40A1FC]">
+                        <Link onClick={() => setSelected('account')} className='text-blue-500 hover:text-[#40A1FC] wrapper' to='/settings/account'>
+                            <h1 className={`${selected === 'account' ? 'selected' : ''}`}>
+                                Account
+                            </h1>
+                        </Link>
                     </li>
                     <li className="mr-6">
-                        <a className="text-blue-500 hover:text-blue-800" href='/'>Link</a>
+                        <Link onClick={() => setSelected('security')} className='text-blue-500 hover:text-[#40A1FC] wrapper' to='/settings/security'>
+                            <h1 className={`${selected === 'security' ? 'selected' : ''}`}>
+                                Security
+                            </h1>
+                        </Link>
                     </li>
                     <li className="mr-6">
-                        <a className="text-blue-500 hover:text-blue-800" href='/'>Link</a>
-                    </li>
-                    <li className="mr-6">
-                        <a className="text-gray-400 cursor-not-allowed" href='/'>Disabled</a>
+                        <Link onClick={() => setSelected('alerts')} className='text-blue-500 hover:text-[#40A1FC] wrapper' to='/settings/alerts'>
+                            <h1 className={`${selected === 'alerts' ? 'selected' : ''}`}>
+                                Alerts
+                            </h1>
+                        </Link>
                     </li>
                 </ul>
-                <Routes>
-                    <Route path="/settings" element={<div>Statistics Page</div>} />
-                </Routes>
             </div>
         </section>
+            <Outlet />
+        </>
     );
 }
 
