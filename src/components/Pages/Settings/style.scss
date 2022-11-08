@@ -54,3 +54,13 @@
     }
 
 }
+
+.arSettingsStyle {
+    h1 {
+        display: flex;
+        justify-content: flex-end;
+    }
+    ul{
+        justify-content: flex-end;
+    }
+}

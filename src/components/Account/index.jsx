@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useClickOutside from '../../hooks/useOnClickOutside';
 import google from './../../assets/google.svg';
-import { setLangAsync, setLanguage } from '../../redux/feature/i18nSlice';
+import { selectTranslations, setLangAsync, setLanguage } from '../../redux/feature/i18nSlice';
+import './style.scss';
+
 const Account = () => {
 
     const state = useSelector((state) => state.i18n)
@@ -12,20 +14,26 @@ const Account = () => {
 
     const localRef = useRef();
     useClickOutside(localRef, () => setShow(false))
+    
+    const { i18n: { locale } } = useSelector((state) => state)
+    const t = useSelector(selectTranslations)
 
-    const { user: { userData: { locale } } } = useSelector((state) => state)
     return (
         <>
-            <section className="bg-[#fff] w-4/5 flex rounded-lg mt-5">
+            <section className={`${locale === 'ar' ? 's-styles' : ''} bg-[#fff] w-4/5 flex rounded-lg mt-5`}
+            >
                 <div className="p-8 w-full">
-                    <h1 className="text-[24px] font-[1100] leading-[35px]">
-                        Account
-                    </h1>
-                    <span className="text-[18px] font-[400] leading-[27px] opacity-[0.5]">Manage your account information settings</span>
+                    <div className="s-head">
+                        <h1 className="text-[24px] font-[1100] leading-[35px]">
+                            {t.settings.account}
+                        </h1>
+                        <span className="text-[18px] font-[400] leading-[27px] opacity-[0.5]">{t.settings.accountTitle}</span>
+                    </div>
                     <hr className="mt-3" />
-                    <div className="flex justify-between my-4">
-                        <div className="flex justify-between w-[22rem]">
-                            <span className="text-[16px] font-[500] leading-[30px]">Language</span>
+                    <div className="c-1 flex justify-between my-4">
+                        <div className="s-1 flex justify-between w-[22rem]">
+                            <span className="text-[16px] font-[500] leading-[30px]">{t.settings.language}
+                            </span>
                             <span className="text-[16px] font-[400] leading-[30px]">{(locale) === 'en' ? 'English' : 'العربية'}</span>
                         </div>
                         <span
@@ -33,7 +41,7 @@ const Account = () => {
                             href="/"
                             id="dropdownDividerButton"
                             data-dropdown-toggle="dropdownDivider"
-                            className={`${show && 'hidden'} text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]`}>Change</span>
+                            className={`${show && 'hidden'} text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]`}>{t.settings.change}</span>
                         <div ref={localRef}
                             id="dropdownDivider"
                             className={`${!show && 'hidden'} right-10  z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}>
@@ -60,31 +68,31 @@ const Account = () => {
                         </div>
                     </div>
                     <hr />
-                    <div className="flex justify-between my-4">
-                        <div className="flex justify-between w-[24rem]">
-                            <span className="text-[16px] font-[500] leading-[30px]">Date</span>
+                    <div className="c-2 flex justify-between my-4">
+                        <div className="s-2 flex justify-between w-[24rem]">
+                            <span className="text-[16px] font-[500] leading-[30px]">{t.settings.date}</span>
                             <span className="text-[16px] font-[400] leading-[30px]">{new Date().toLocaleString("en-GB", {
                                 day: "numeric",
                                 month: "short",
                                 year: "numeric",
                             })}</span>
                         </div>
-                        <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">Change</a>
+                        <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">{t.settings.change}</a>
                     </div>
                     <hr />
-                    <div className="flex justify-between my-4">
-                        <div className="flex justify-between w-[38rem]">
-                            <span className="text-[16px] font-[500] leading-[30px]">Time zone</span>
+                    <div className="c-3 flex justify-between my-4">
+                        <div className="s-3 flex justify-between w-[38rem]">
+                            <span className="text-[16px] font-[500] leading-[30px]">{t.settings.timezone}</span>
                             <span className="text-[16px] font-[400] leading-[30px]">Time zone in Jerusalem, Palestine (GMT+3)</span>
                         </div>
-                        <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">Change</a>
+                        <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">{t.settings.change}</a>
                     </div>
                     <hr />
-                    <div className="flex justify-between mt-4 items-center">
-                        <div className="flex flex-col w-[38rem]">
-                            <span className="text-[16px] font-[500] leading-[30px]">Linked Accounts</span>
+                    <div className="c-4 flex justify-between mt-4 items-center">
+                        <div className="s-4 flex flex-col w-[38rem]">
+                            <span className="text-[16px] font-[500] leading-[30px]">{t.settings.linkedAccounts}</span>
                             <span className="text-[16px] font-[400] leading-[20px] opacity-[0.5]">
-                                We use this to let you sign in and organize your tasks
+                                {t.settings.accountDescription}
                             </span>
                             <div
                                 type="button"
@@ -96,7 +104,7 @@ const Account = () => {
                         <button
                             type="button"
                             className="text-[#40A1FC] bg-[#ECF6FF] hover:bg-[#b4d8f7] font-medium rounded-lg px-3 h-10 w-50">
-                            Unlink account
+                            {t.settings.unlinkAccount}
                         </button>
                     </div>
                 </div>

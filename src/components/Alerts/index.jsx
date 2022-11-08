@@ -1,16 +1,25 @@
+import { useSelector } from 'react-redux';
+import { selectTranslations } from '../../redux/feature/i18nSlice';
+import './style.scss';
+
 const Alerts = () => {
+
+    const { i18n: { locale } } = useSelector((state) => state)
+    const t = useSelector(selectTranslations)
+
     return (
-        <section className="bg-[#fff] w-4/5 flex rounded-lg mt-5">
+        <section className={`${locale === 'ar' ? 'arAlertsStyle' : ''} bg-[#fff] w-4/5 flex rounded-lg mt-5`}
+        >
             <div className="p-8 w-full">
-                <h1 className="text-[24px] font-[1100] leading-[35px]">
-                    Alerts
-                </h1>
-                <span className="text-[18px] font-[400] leading-[27px] opacity-[0.5]">Manage your alerts and notifications settings</span>
+                <div className="a-title">
+                    <h1 className="text-[24px] font-[1100] leading-[35px]">
+                        {t.settings.alerts}
+                    </h1>
+                    <span className="text-[18px] font-[400] leading-[27px] opacity-[0.5]">{t.settings.accountTitle}</span>
+                </div>
                 <hr className="mt-3" />
-                <div className="flex justify-between my-4">
-                    <div className="flex justify-between w-[22rem]">
-                        <span className="text-[16px] font-[500] leading-[30px]">Receive a notification when the task is due</span>
-                    </div>
+                <div className="c-1 flex justify-between my-4">
+                    <span className="text-[16px] font-[500] leading-[30px]">{t.settings.notification}</span>
                     <label htmlFor="toggle-1" className="inline-flex relative cursor-pointer">
                         <input
                             name="notification"
@@ -21,17 +30,15 @@ const Alerts = () => {
                     </label>
                 </div>
                 <hr />
-                <div className="flex justify-between my-4">
-                    <div className="flex justify-between w-[24rem]">
-                        <span className="text-[16px] font-[500] leading-[30px]">Active Alerts</span>
-                    </div>
+                <div className="c-1 flex justify-between my-4">
+                    <span className="text-[16px] font-[500] leading-[30px]">{t.settings.active}</span>
                     <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">View</a>
                 </div>
                 <hr />
-                <div className="flex justify-between my-4">
+                <div className="c-1 flex justify-between my-4">
                     <div className="flex flex-col justify-between w-[24rem]">
-                        <span className="text-[16px] font-[500] leading-[30px]">Disable All Alerts</span>
-                        <span className="text-[16px] font-[400] leading-[27px] opacity-[0.5]">This action will disable all tasks alerts!</span>
+                        <span className="text-[16px] font-[500] leading-[30px]">{t.settings.disable}</span>
+                        <span className="text-[16px] font-[400] leading-[27px] opacity-[0.5]">{t.settings.dMsg}</span>
                     </div>
                     <label htmlFor="toggle-2" className="inline-flex relative cursor-pointer">
                         <input

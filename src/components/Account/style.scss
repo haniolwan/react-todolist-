@@ -1,0 +1,27 @@
+.s-styles {
+    width: auto;
+    margin-left: 8%;
+    .s-head {
+        text-align: end;
+    }
+
+    .c-1,
+    .s-1,
+    .c-2,
+    .s-2,
+    .c-3,
+    .s-3 {
+        flex-direction: row-reverse;
+    }
+
+    .s-4 {
+        display: flex;
+        align-items: flex-end
+    }
+
+    .c-4 {
+        flex-direction: row-reverse;
+        text-align: end;
+    }
+
+}

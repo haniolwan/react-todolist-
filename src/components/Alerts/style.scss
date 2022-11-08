@@ -1,0 +1,13 @@
+.arAlertsStyle {
+    width: auto;
+    margin-left: 8%;
+    .a-title {
+        text-align: end;
+    }
+
+    .c-1,
+    .c-2 {
+        flex-direction: row-reverse;
+        text-align: end;
+    }
+}

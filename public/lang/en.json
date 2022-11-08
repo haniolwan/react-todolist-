@@ -31,7 +31,7 @@
         "complete": "Complete",
         "edit": "Edit",
         "delete": "Delete",
-        "done":"Task is done"
+        "done": "Task is done"
     },
     "statistics": {
         "tasks": "Tasks",
@@ -45,5 +45,26 @@
         "confirm": "Are you sure you want to complete all tasks?",
         "complete": "Complete",
         "cancel": "Cancel"
+    },
+    "settings": {
+        "title": "Settings",
+        "account": "Account",
+        "security": "Security",
+        "alerts": "Alerts",
+        "accountTitle": "Manage your account information settings",
+        "language": "Language",
+        "date": "Date",
+        "timezone": "Time zone",
+        "linkedAccounts": "Linked Accounts",
+        "accountDescription": "We use this to let you sign in and organize your tasks",
+        "unlinkAccount": "Unlink account",
+        "notification":"Receive a notification when the task is due",
+        "change": "Change",
+        "password":"Password",
+        "question":"Security Question",
+        "active": "Active Alerts",
+        "view": "View",
+        "disable": "Disable All Alerts",
+        "dMsg": "This action will disable all tasks alerts!"
     }
 }
