@@ -1,7 +1,19 @@
+import { useRef } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useClickOutside from '../../hooks/useOnClickOutside';
 import google from './../../assets/google.svg';
-
+import { setLangAsync, setLanguage } from '../../redux/feature/i18nSlice';
 const Account = () => {
 
+    const state = useSelector((state) => state.i18n)
+    const [show, setShow] = useState();
+    const dispatch = useDispatch();
+
+    const localRef = useRef();
+    useClickOutside(localRef, () => setShow(false))
+
+    const { user: { userData: { locale } } } = useSelector((state) => state)
     return (
         <>
             <section className="bg-[#fff] w-4/5 flex rounded-lg mt-5">
@@ -14,9 +26,38 @@ const Account = () => {
                     <div className="flex justify-between my-4">
                         <div className="flex justify-between w-[22rem]">
                             <span className="text-[16px] font-[500] leading-[30px]">Language</span>
-                            <span className="text-[16px] font-[400] leading-[30px]">English</span>
+                            <span className="text-[16px] font-[400] leading-[30px]">{(locale) === 'en' ? 'English' : 'العربية'}</span>
                         </div>
-                        <a href="/" className="text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]">Change</a>
+                        <span
+                            onClick={() => setShow((show) => !show)}
+                            href="/"
+                            id="dropdownDividerButton"
+                            data-dropdown-toggle="dropdownDivider"
+                            className={`${show && 'hidden'} text-[16px] font-[400] leading-[30px] no-underline hover:underline text-[#40A1FC]`}>Change</span>
+                        <div ref={localRef}
+                            id="dropdownDivider"
+                            className={`${!show && 'hidden'} right-10  z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}>
+                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+                                {
+                                    Object.entries(state.supportedLang).map(([code, name]) => {
+                                        return (
+                                            <li key={code}>
+                                                <a
+                                                    onClick={
+                                                        (event) => {
+                                                            event.preventDefault();
+                                                            dispatch(setLanguage(code))
+                                                            dispatch(setLangAsync(code))
+                                                        }
+                                                    }
+                                                    href="/"
+                                                    className={`block py-2 px-4 dark:hover:bg-gray-600 dark:hover:text-white hover:bg-gray-300 ${code === state.locale && 'bg-gray-200'} `}>{name}</a>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
                     </div>
                     <hr />
                     <div className="flex justify-between my-4">

@@ -1,0 +1,49 @@
+{
+    "fullsidebar": {
+        "home": "الرئيسية",
+        "calender": "التقويم",
+        "notifications": "التنبيهات",
+        "settings": "الاعدادات"
+    },
+    "header": {
+        "title": "مرحبا بك",
+        "description": "تفقد مهامك اليوم",
+        "search": "إبحث عن مهمة",
+        "add": "إضافة مهمة جديدة"
+    },
+    "profile": {
+        "profession": "مصمم ويب",
+        "account": "حسابي",
+        "edit": "تعديل حسابي",
+        "settings": "الاعدادات",
+        "logout": "تسجيل خروج"
+    },
+    "home": {
+        "tasks": "المهام"
+    },
+    "tasks": {
+        "completeAll": "انهاء الجميع",
+        "title": "مهامك اليوم",
+        "all": "الجميع",
+        "urgent": "طارئة",
+        "important": "مهم",
+        "normal": "عادي",
+        "complete": "انهاء المهمة",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "done": "تم انهاء المهمة"
+    },
+    "statistics": {
+        "tasks": "مهام",
+        "daily": "الاحصائيات اليومية",
+        "completed": "المهام المنتهية",
+        "remaining": "المهام المتبقية",
+        "completion": "نسبة الانجاز"
+    },
+    "complete": {
+        "title": "انهاء جميع المهام",
+        "confirm": "هل تريد انهاء جميع المهام؟",
+        "complete": "انهاء",
+        "cancel": "الغاء"
+    }
+}

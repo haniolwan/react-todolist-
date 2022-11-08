@@ -1,0 +1,16 @@
+.aside {
+    float: right;
+    margin-right: 0;
+    margin-left: 1.25rem;
+    width: 13%;
+
+    a {
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+    }
+
+    span {
+        margin-left: 0;
+        margin-right: 0.5rem;
+    }
+}

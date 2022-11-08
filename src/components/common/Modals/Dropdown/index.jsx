@@ -2,9 +2,10 @@ import { useContext, useRef } from 'react';
 import axios from 'axios';
 import Notifications from '../../../../context/Notifications';
 import SelectedTodoContext from '../../../../context/SelectedTodo';
-
-import './style.css'
 import useClickOutside from '../../../../hooks/useOnClickOutside';
+import { useSelector } from 'react-redux';
+import { selectTranslations } from '../../../../redux/feature/i18nSlice';
+import './style.scss';
 
 
 const Dropdown = ({ clickedId, taskId, setClickedId, setTodos, setShowModal }) => {
@@ -56,11 +57,13 @@ const Dropdown = ({ clickedId, taskId, setClickedId, setTodos, setShowModal }) =
     const dropDownRef = useRef();
     useClickOutside(dropDownRef, () => setClickedId(false))
 
+    const t = useSelector(selectTranslations)
+
     return (
         (clickedId === taskId) &&
         (<div
             ref={dropDownRef} id="dropdown" className={`shadow-2xl relative z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 bg-gray rounded-3xl`}>
-            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 rounded-3xl" aria-labelledby="dropdownDefault">
+            <ul className="dropdown-items py-1 text-sm text-gray-700 dark:text-gray-200 rounded-3xl" aria-labelledby="dropdownDefault">
                 <li onClick={() => setClickedId(null)}>
                     <span className="block py-2 px-4">X</span>
                 </li>
@@ -69,21 +72,21 @@ const Dropdown = ({ clickedId, taskId, setClickedId, setTodos, setShowModal }) =
                         onClick={(event) => completeTask(event)}
                         href="/"
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >Complete</a>
+                    >{t.tasks.complete}</a>
                 </li>
                 <li>
                     <a
                         onClick={(event) => editTask(event)}
                         href="/"
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >Edit</a>
+                    >{t.tasks.edit}</a>
                 </li>
                 <li>
                     <a
                         onClick={(event) => deleteTask(event)}
                         href="/"
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >Delete</a>
+                    >{t.tasks.delete}</a>
                 </li>
             </ul>
         </div >)

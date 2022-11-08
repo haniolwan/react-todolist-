@@ -4,6 +4,8 @@ import { useSpring, animated } from 'react-spring';
 import TodosContext from '../../../context/Todos';
 import StatsSkelton from '../Skelton/StatsSkelton';
 import useMeasure from 'react-use-measure'
+import { selectTranslations } from '../../../redux/feature/i18nSlice';
+import { useSelector } from 'react-redux';
 import './style.scss';
 
 const DailyStatistics = () => {
@@ -46,24 +48,28 @@ const DailyStatistics = () => {
         config: { duration: 1200 },
     })
 
+    const { i18n: { locale } } = useSelector((state) => state)
+    const t = useSelector(selectTranslations)
+
     return (
         loading ?
             <StatsSkelton /> :
             <>
-                <section className="w-50 h-50 bg-[#fff] mt-3 p-4">
-                    <h1 className="font-bold mb-4">Daily Statistics</h1>
+                <section className={`${locale === 'ar' ? 'stats-ar' : ''}  w-50 h-50 bg-[#fff] mt-3 p-4`}
+                >
+                    <h1 className="font-bold mb-4">{t.statistics.daily}</h1>
                     <div className="stats flex justify-between items-center rounded-md w-50 h-15 bg-[#ECF6FF] p-2 mb-3">
-                        <span>Completed Tasks</span>
-                        <span className="font-bold">{stats.completedTasks} Tasks</span>
+                        <span>{t.statistics.completed}</span>
+                        <span className="font-bold">{stats.completedTasks} {t.statistics.tasks}</span>
                     </div>
                     <div className="stats flex justify-between items-center rounded-md w-50 h-15 bg-[#ECF6FF] p-2 mb-3">
-                        <span>Remaining Tasks</span>
-                        <span className="font-bold">{stats.remainingTasks} Tasks</span>
+                        <span>{t.statistics.remaining}</span>
+                        <span className="font-bold">{stats.remainingTasks} {t.statistics.tasks}</span>
                     </div>
                     <div ref={ref} className="c-stats-container">
                         <animated.div className="fill" style={props} />
                         <animated.div className="content">
-                            <span>Completion Rate</span>
+                            <span>{t.statistics.completion}</span>
                             <span className="font-bold text-[#40A1FC]">{stats.completionRate}</span>
                         </animated.div>
                     </div>

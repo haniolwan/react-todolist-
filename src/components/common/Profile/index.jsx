@@ -1,43 +1,46 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import user from './../../../assets/dropdown/account.svg';
 import edit from './../../../assets/dropdown/edit-user.svg';
 import settings from './../../../assets/dropdown/settings.svg';
 import logout from './../../../assets/dropdown/sign-out.svg';
-import { useSelector } from 'react-redux';
 import logoutUser from '../../../utils/logout';
 import './style.css';
+import { selectTranslations } from '../../../redux/feature/i18nSlice';
 
 
 const Profile = () => {
     const [show, setShow] = useState(false);
-    const { userData: { name } } = useSelector((state) => state.user);
+    const { user: { userData: { name } }, i18n: { locale } } = useSelector((state) => state);
+    const t = useSelector(selectTranslations)
+
     const showMenu = () => {
         setShow((show) => !show);
     }
     return (
-        <div className="action">
+        <div className={`${locale === 'ar' ? 'arAction' : 'action'}`}>
             <div className="profile" onClick={() => showMenu()}>
                 <img src='https://i.pinimg.com/736x/b0/e2/f5/b0e2f54d141a70986beac46962394651.jpg' alt="profile IMG" />
             </div>
             <div className={`menu ${show && 'active'}`}
             >
-                <h3 className="capitalize">{name}<br /><span>Software Developer</span></h3>
+                <h3 className="capitalize">{name}<br /><span>{t.profile.profession}</span></h3>
                 <ul>
                     <li>
                         <img src={user} alt="user" />
-                        <a href="/">My profile</a>
+                        <a href="/">{t.profile.account}</a>
                     </li>
                     <li>
                         <img src={edit} alt="edit user" />
-                        <a href="/">Edit profile</a>
+                        <a href="/">{t.profile.edit}</a>
                     </li>
                     <li>
                         <img src={settings} alt="settings" />
-                        <a href="/">Setting</a>
+                        <a href="/">{t.profile.settings}</a>
                     </li>
                     <li>
                         <img src={logout} alt="user" />
-                        <a href="/" onClick={logoutUser}>Logout</a>
+                        <a href="/" onClick={logoutUser}>{t.profile.logout}</a>
                     </li>
                 </ul>
             </div>

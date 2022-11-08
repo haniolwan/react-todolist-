@@ -1,0 +1,49 @@
+{
+    "fullsidebar": {
+        "home": "Home",
+        "calender": "Calender",
+        "notifications": "Notifications",
+        "settings": "Settings"
+    },
+    "header": {
+        "title": "Welcome",
+        "description": "Take a look for your tasks today",
+        "search": "Search for task",
+        "add": "Add New Task"
+    },
+    "profile": {
+        "profession": "Software Developer",
+        "account": "My Profile",
+        "edit": "Edit Profile",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
+    "home": {
+        "tasks": "Tasks"
+    },
+    "tasks": {
+        "completeAll": "Complete All",
+        "title": "Tasks For This Day",
+        "all": "All",
+        "urgent": "Urgent",
+        "important": "Important",
+        "normal": "Normal",
+        "complete": "Complete",
+        "edit": "Edit",
+        "delete": "Delete",
+        "done":"Task is done"
+    },
+    "statistics": {
+        "tasks": "Tasks",
+        "daily": "Daily Statistics",
+        "completed": "Completed Tasks",
+        "remaining": "Remaining Tasks",
+        "completion": "Completion Rate"
+    },
+    "complete": {
+        "title": "Complete All Tasks",
+        "confirm": "Are you sure you want to complete all tasks?",
+        "complete": "Complete",
+        "cancel": "Cancel"
+    }
+}

@@ -28,7 +28,6 @@ const getTokenn = (setNotifyToken, userId) => {
     return getToken(messaging, { vapidKey: REACT_APP_VAPID_KEY }).then(async (currentToken) => {
         if (currentToken) {
             setNotifyToken(currentToken)
-            console.log(currentToken)
             await axios.post('/updateUserToken', {
                 userId,
                 notifyToken: currentToken

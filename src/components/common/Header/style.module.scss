@@ -1,0 +1,50 @@
+.headerContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding-bottom: 20px;
+
+    h1 {
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+.arHeaderContainer {
+    display: flex;
+    justify-content: end;
+    padding-bottom: 20px;
+    gap: 25px;
+
+    >div:first-of-type {
+        text-align: right;
+        order: 5;
+        margin-left: 30px;
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: right;
+        order: 3;
+    }
+
+    input {
+        text-align: right;
+        order: 1;
+        width: 60%;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: 20px;
+        width: 151px;
+        height: 42px;
+    }
+}

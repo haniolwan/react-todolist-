@@ -7,7 +7,6 @@ import { useRef } from "react";
 import Notifications from "../../../../context/Notifications";
 import useClickOutside from "../../../../hooks/useOnClickOutside";
 
-
 const ChangePassword = ({ show, setShow }) => {
     const [password, setPassword] = useState({
         password: "",

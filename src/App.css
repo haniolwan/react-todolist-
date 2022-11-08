@@ -40,3 +40,12 @@
 .backdrop{
   background: rgba(0,0,0,0.5);
 }
+
+.new-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+  width: 150px;
+  height: 42px;
+}

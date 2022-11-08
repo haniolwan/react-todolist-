@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import sideArrow from './../../../../assets/left-arrow.svg';
 import logo from './../../../../assets/logo.svg';
-import './style.css';
+import Style from './style.module.scss';
 const CollabsedSidebar = ({ showCollabsed }) => {
+    const { i18n: { locale } } = useSelector((state) => state)
     const { pathname } = useLocation();
     return (
-        <aside className="h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-gray-100 rounded bg-white mr-5">
+        <aside className={`h-screen flex flex-col items-center overflow-hidden text-gray-700 bg-gray-100 rounded bg-white mr-5 ${locale === 'ar' && Style.collabsedaAside}`}>
             <Link to={'/'} className="flex items-center justify-center mt-3">
                 <img className="stroke-current w-9" src={logo} alt="side arrow" />
             </Link>

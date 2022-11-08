@@ -170,17 +170,46 @@
     border-radius: 10px;
 }
 
-.alerted{
+.alerted {
     background: #b4d8f7;
-    img{
+
+    img {
         filter: invert(51%) sepia(62%) saturate(1678%) hue-rotate(187deg) brightness(103%) contrast(98%);
     }
 }
-// .alerted {
-//     opacity: 1px;
-//     background: #dbd8d8;
 
-//     img {
-//         opacity: 1px;
-//     }
-// }
+
+.arTasksStyle {
+    .t-info {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+    }
+
+    .tasks-header,
+    .status-buttons,
+    .new-task,
+    .task-time {
+        flex-direction: row-reverse;
+    }
+
+    .checkmark {
+        position: absolute;
+        left: auto;
+        right: 0;
+
+    }
+
+    .check-box-container {
+        padding-left: 0;
+        padding-right: 35px;
+    }
+
+    .new-task-btn{
+        margin-left: 0;
+        justify-content: center;
+    }
+    .dropdown-items{
+        text-align: end;
+    }
+}

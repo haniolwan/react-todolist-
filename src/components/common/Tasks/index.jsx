@@ -15,6 +15,8 @@ import alert from './../../../assets/alert.svg';
 import clock from './../../../assets/clock.svg';
 import kabab from './../../../assets/kabab.svg';
 import './style.scss';
+import { selectTranslations } from '../../../redux/feature/i18nSlice';
+import { useSelector } from 'react-redux';
 
 const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
     const [loading, setLoading] = useState(true);
@@ -124,18 +126,21 @@ const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
         }
     }
 
+    const { i18n: { locale } } = useSelector((state) => state)
+    const t = useSelector(selectTranslations)
+
     return (
         <>
-            <section className="tasks-section bg-[#fff] w-4/5 h-full">
+            <section className={`${locale === 'ar' ? 'arTasksStyle' : ""} tasks-section bg-[#fff] w-4/5 h-full`}>
                 <div className="tasks-container">
                     <div className="tasks-header p-5 pb-0">
-                        <h1>Tasks For This Day</h1>
+                        <h1>{t.tasks.title}</h1>
                         <button
                             onClick={() => setShowCompleteModal(true)}
                             type="button"
                             className="new-task-btn mr-4 text-[#40A1FC] bg-[#ECF6FF] hover:bg-[#b4d8f7] font-medium rounded-lg text-sm px-3 py-2.5">
                             <img src={check} alt="check tasks" />
-                            Complete All
+                            {t.tasks.completeAll}
                         </button>
                     </div>
                     <div className="status-buttons p-5">
@@ -143,25 +148,25 @@ const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
                             type="button"
                             className={`task-status-btn ${filter === '' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
                             onClick={() => setFilter('')}>
-                            All
+                            {t.tasks.all}
                         </button>
                         <button
                             type="button"
                             className={`task-status-btn ${filter === 'Urgent' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
                             onClick={() => setFilter('Urgent')}>
-                            Urgent
+                            {t.tasks.urgent}
                         </button>
                         <button
                             type="button"
                             className={`task-status-btn ${filter === 'Important' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
                             onClick={() => setFilter('Important')}>
-                            Important
+                            {t.tasks.important}
                         </button>
                         <button
                             type="button"
                             className={`task-status-btn ${filter === 'Normal' ? 'text-white bg-[#40a1fc] hover:bg-[#6fb8fc]' : 'text-opacity-10 text-black bg-[#e8e3e3] hover:bg-[#c4c2c2]'} font-medium rounded-lg text-sm px-3 py-1`}
                             onClick={() => setFilter('Normal')}>
-                            Normal
+                            {t.tasks.normal}
                         </button>
                     </div>
                     {loading ?
@@ -175,11 +180,13 @@ const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
                                         <div className="task-info">
                                             <label className="check-box-container">
                                                 <div>
-                                                    <span className={`text-lg ${task.state === 'done' ? 'line-through' : ""}`}>{task.title}</span>
-                                                    <span className={`task-status ${priorityColor(task.priority)}`}>{task.priority}</span>
+                                                    <div className="t-info">
+                                                        <span className={`text-lg ${task.state === 'done' ? 'line-through' : ""}`}>{task.title}</span>
+                                                        <span className={`task-status ${priorityColor(task.priority)}`}>{t.tasks[task.priority.toLowerCase()]}</span>
+                                                    </div>
                                                     <div className="task-time">
                                                         <img src={clock} alt="task clock" />
-                                                        at {task.time}
+                                                        {locale === 'ar' ? 'على' : 'at'} {task.time}
                                                     </div>
                                                 </div>
                                                 <input name={task._id} type="checkbox" checked={task.state === 'done'} onChange={handleChange} />
@@ -209,7 +216,7 @@ const Tasks = ({ search, selectedDate, showTaskModal, setShowTaskModal }) => {
                                         </div>) :
                                             (<div className='flex items-center gap-3 mr-4'>
                                                 <img className="check-icon h-7 w-7" src={check} alt="task kabab" />
-                                                <span>Task Done</span>
+                                                <span>{t.tasks.done}</span>
                                             </div>)}
                                     </div>)
                             })}

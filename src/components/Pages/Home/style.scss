@@ -1,0 +1,43 @@
+.arhomeStyle {
+    justify-content: start;
+
+    .tasks-title {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    >div {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .month {
+        justify-content: flex-end;
+    }
+
+    .month-year {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+    }
+
+    .complete-title {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+        button {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    .complete-head {
+        text-align: end;
+    }
+
+    .complete-btns {
+        justify-content: flex-start;
+
+    }
+}
