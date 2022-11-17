@@ -5,9 +5,10 @@ import {
   Route,
 } from 'react-router-dom';
 import NotificationsContext from './context/Notifications';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import store from './redux/app/store';
 import { getUserData } from './redux/feature/userSlice';
+
 
 import {
   CollabsedSidebar,
@@ -45,14 +46,14 @@ const App = () => {
     return ((parseInt(date.getMonth()) + 1) + '-' + date.getDate())
   });
 
-
-
   useEffect(() => {
     store.dispatch(getUserData());
     store.dispatch(setLangAsync());
   }, [])
 
-  const { loading, translations } = useSelector((state) =>(state.i18n));
+
+  const { loading } = useSelector((state) => (state.i18n));
+  const state = useSelector((state)=> console.log(state))
   return (
     loading ?
       <h1>... Loading</h1> :
