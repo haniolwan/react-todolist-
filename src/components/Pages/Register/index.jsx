@@ -13,6 +13,7 @@ import logoutUser from '../../../utils/logout';
 import { getTokenn } from '../../../firebase';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
+import FacebookLogin from 'react-facebook-login';
 
 const Register = () => {
     const [user, setUser] = useState({ first_name: "", last_name: "", email: "", password: "" })
@@ -113,9 +114,27 @@ const Register = () => {
         }
     }
 
-    const onFailure = (err) => {
-        console.log('failed:', err);
-    };
+    const registerFaceebook = async ({ name, email, picture: { data: { url } } }) => {
+        try {
+            const { data: { data: { user: loggedUser, token, message } } } = await axios.post('/signup', {
+                name,
+                email,
+                image: url,
+                password: '12345',
+                loginType: 'facebook'
+            })
+            getTokenn(setNotifyToken, loggedUser.id)
+            dispatch(sign({ ...loggedUser, token }));
+            setCookie("user", token, {
+                path: "/"
+            });
+            setTitle(message)
+            return navigate('/');
+        } catch ({ response: { data: { message } } }) {
+            setError(message)
+        }
+    }
+
 
     return (
         <>
@@ -150,15 +169,20 @@ const Register = () => {
                                     </button>
                                 )}
                                 buttonText="Sign up with Google"
-                                onFailure={onFailure}
                                 cookiePolicy={'single_host_origin'}
                                 onSuccess={(res) => registerGoogle(res)}
                             />
-                            <button
-                                type="button"
-                                className="flex items-center gap-3 py-2 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                <img src={facebook} alt="facebook" />
-                                Sign in with Facebook</button>
+                            <FacebookLogin
+                                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                                fields="name,email,picture"
+                                textButton='Sign up with Facebook'
+                                callback={(res) => registerFaceebook(res)}
+                                cssClass='flex items-center gap-3 py-2 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                                icon={
+                                    <img src={facebook} alt="facebook" />
+                                }
+                            />
+
                         </div>
                         <div className="flex items-center justify-center text-center">
                             <hr />

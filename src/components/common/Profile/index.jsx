@@ -20,7 +20,7 @@ const Profile = () => {
     return (
         <div className={`${locale === 'ar' ? 'arAction' : 'action'}`}>
             <div className="profile" onClick={() => showMenu()}>
-                <img src='https://i.pinimg.com/736x/b0/e2/f5/b0e2f54d141a70986beac46962394651.jpg' alt="profile IMG" />
+                <img src='' alt="profile IMG" />
             </div>
             <div className={`menu ${show && 'active'}`}
             >
