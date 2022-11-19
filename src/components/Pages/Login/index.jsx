@@ -109,7 +109,6 @@ const Login = () => {
         } catch ({ response: { data: { message } } }) {
             setError(message)
         }
-
     }
 
     const loginFacebook = async ({ name, email, picture: { data: { url } } }) => {
@@ -211,7 +210,7 @@ const Login = () => {
                                     {inputError.passwordError || null}
                                 </p>
                             </div>
-                            <a href="/" className="self-start hover:underline text-[#6FB8FC]">Forgot password?</a>
+                            <Link to={"/password/reset"} className="self-start hover:underline text-[#6FB8FC]"> Forgot Password?</Link>
                         </div>
                         <button
                             onClick={() => loginUser()}

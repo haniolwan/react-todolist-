@@ -8,8 +8,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/app/store';
 import "react-datepicker/dist/react-datepicker.css";
-import { Login } from './components/Pages';
-import Register from './components/Pages/Register';
+import { Login,Register,ForgotPassword } from './components/Pages';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +20,7 @@ root.render(
         <Routes>
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="/password/reset" element={<ForgotPassword />} />
           <Route path="*" element={<App />} />
         </Routes>
       </BrowserRouter>

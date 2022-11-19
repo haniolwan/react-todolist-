@@ -4,10 +4,12 @@ import Calender from "./Calender";
 import Notification from "./Notification";
 import Settings from "./Settings";
 import Register from "./Register";
+import ForgotPassword from "./Forgot Password";
 
 export {
     Login,
     Register,
+    ForgotPassword,
     Home,
     Calender,
     Notification,
