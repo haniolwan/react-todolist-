@@ -5,6 +5,7 @@ import Notification from "./Notification";
 import Settings from "./Settings";
 import Register from "./Register";
 import ForgotPassword from "./Forgot Password";
+import ResetPassword from "./Reset Password";
 
 export {
     Login,
@@ -13,5 +14,6 @@ export {
     Home,
     Calender,
     Notification,
-    Settings
+    Settings,
+    ResetPassword
 }
