@@ -27,7 +27,6 @@ import {
 import './firebase.js';
 import Account from './components/Account';
 import { Alerts, Security } from './components';
-import { setLangAsync } from './redux/feature/i18nSlice';
 import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -48,12 +47,10 @@ const App = () => {
 
   useEffect(() => {
     store.dispatch(getUserData());
-    store.dispatch(setLangAsync());
   }, [])
 
 
   const { loading } = useSelector((state) => (state.i18n));
-  const state = useSelector((state)=> console.log(state))
   return (
     loading ?
       <h1>... Loading</h1> :

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setLangAsync } from './i18nSlice';
 
 const initialState = {
     userData: {},
@@ -9,8 +10,9 @@ const initialState = {
     notifyToken: ""
 };
 
-export const getUserData = createAsyncThunk('user/getUserData', async () => {
+export const getUserData = createAsyncThunk('user/getUserData', async (_ , thunkAPI) => {
     const { data: { data } } = await axios.get('/checkAuth');
+    thunkAPI.dispatch(setLangAsync(data.locale));
     return data;
 });
 

@@ -66,5 +66,34 @@
         "view": "اظهار",
         "disable": "تعطيل جميع الاشعارات",
         "dMsg": "هذه الحركة ستعطل جميع الاشعارات"
+    },
+    "addTask": {
+        "add":"اضافة مهمة جديدة",
+        "description":"وصف المهمة",
+        "descriptionMsg":"ادخل وصف المهمة",
+        "priority":"اهمية المهمة",
+        "urgent":"طارئة",
+        "important":"مهم",
+        "normal":"عادي",
+        "color":"لون المهمة",
+        "category":"تصنيف المهمة",
+        "categoryOption":{
+            "fitness":"لياقة",
+            "food":"غذاء",
+            "gaming":"ألعاب",
+            "studying":"دراسة"
+        },
+        "date":"الوقت والتاريخ",
+        "notification":"تفعيل اشعارات",
+        "alert":"استقبال اشعار عند انتهاء المهمة",
+        "motivation":"ادخل نص تحفيزي",
+        "cancel":"الغاء",
+        "confirm":"إضافة",
+        "update":"تعديل",
+        "descriptionRequired":"الوصف مطلوب",
+        "colorRequired":"اللون مطلوب",
+        "dateRequired":"الوقت والتاريخ مطلوب",
+        "endedTodo":"لا يمكن تفعيل اشعار لمهمة منتهية",
+        "selectDate":"اختيار التاريخ"
     }
 }

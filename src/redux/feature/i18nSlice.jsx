@@ -52,7 +52,7 @@ export const i18nSlice = createSlice({
 
 
 export const selectTranslations = (state) =>
-  state.i18n.translations;
+    state.i18n.translations;
 export default i18nSlice.reducer;
 
 export const { setLanguage } = i18nSlice.actions;

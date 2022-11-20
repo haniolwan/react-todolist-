@@ -66,5 +66,35 @@
         "view": "View",
         "disable": "Disable All Alerts",
         "dMsg": "This action will disable all tasks alerts!"
+    },
+    "addTask": {
+        "add":"Add New Task",
+        "description":"Task Description",
+        "descriptionMsg":"Enter Task Description",
+        "priority":"Task Priority",
+        "urgent":"Urgent",
+        "important":"Important",
+        "normal":"Normal",
+        "color":"Task Color",
+        "category":"Task Category",
+        "categoryOption":{
+            "option":"Choose a category",
+            "fitness":"Fitness",
+            "food":"Food",
+            "gaming":"Gaming",
+            "studying":"Studying"
+        },
+        "date":"Date and Time",
+        "notification":"Get Notification",
+        "alert":"Receive a notification when the task is due",
+        "motivation":"Enter motivitional description",
+        "cancel":"CANCEL",
+        "confirm":"ADD TASK",
+        "update":"UPDATE TASK",
+        "descriptionRequired":"Description is required",
+        "colorRequired":"Color is required",
+        "dateRequired":"Date and time is required",
+        "endedTodo":"Cannot set notification to ended todo",
+        "selectDate":"Select Date"
     }
 }

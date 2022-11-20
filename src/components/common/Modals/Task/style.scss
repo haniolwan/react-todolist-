@@ -158,3 +158,49 @@
   width: 50%;
   border: 1px solid gray;
 }
+
+.arTaskModal {
+  .modal-header {
+    flex-direction: row-reverse;
+  }
+
+  .modal-body {
+    flex-direction: row-reverse;
+    text-align: end;
+  }
+
+  .priority-btns {
+    gap: 1.5rem;
+
+    .normal-btn-checked {
+      gap: 2rem;
+    }
+
+    .important-btn-checked {
+      gap: 2rem;
+    }
+
+    .urgent-btn-checked {
+      gap: 2rem;
+    }
+
+  }
+
+  .task-color {
+    justify-content: flex-end;
+  }
+
+  input {
+    text-align: right;
+  }
+
+  .notification {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .modal-footer {
+    flex-direction: row-reverse;
+  }
+
+}
